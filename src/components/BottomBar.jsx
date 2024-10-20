@@ -1,8 +1,5 @@
 import React from 'react'
-import { Box } from '@mui/material'
 import MyTypography from './MyTypography'
-import Section from './Section'
-import { alignProperty } from '@mui/material/styles/cssUtils'
 
 const BottomBar = () => {
   return (

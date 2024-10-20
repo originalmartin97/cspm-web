@@ -58,8 +58,8 @@ const Screen = () => {
             </MyTypography>
           </Section>
         </MyPaper>
-        <BottomBar />
       </Container>
+      <BottomBar />
     </>
   )
 }

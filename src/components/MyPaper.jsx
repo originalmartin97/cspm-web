@@ -7,9 +7,10 @@ const MyPaper = ({ children }) => {
     <>
       <Paper
         sx={{
-          width: '100%', // Full width
+          width: 'auto', // Full width
           padding: '16px',
           borderRadius: '10px',
+          backgroundColor: 'rgb(254, 247, 255)',
         }}
       >
         { children }

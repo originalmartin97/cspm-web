@@ -1,4 +1,4 @@
-import { Container, Box} from '@mui/material'
+import { Container, Box } from '@mui/material'
 import React from 'react'
 import Appbar from './Appbar'
 import MyPaper from './MyPaper'
@@ -10,6 +10,7 @@ import BottomBar from './BottomBar'
 const Screen = () => {
   return (
     <>
+      <Appbar />
       <Container
         sx={{
           display: 'flex',
@@ -19,52 +20,46 @@ const Screen = () => {
           marginBottom: '6px',
         }}
       >
-        <Appbar />
         <MyPaper>
           <Section>
             <MyTypography>
-              Udvozlo szoveg
+              Üdvözlő szöveg
             </MyTypography>
           </Section>
-            <Box
-              component="img"
-              src = { hook }
-              sx={{
-                width: '100%', // Adjust the width as needed
-                height: 'auto', // Maintain aspect ratio
-                borderRadius: '10px',
-                mt: '16px', // Margin top
-                boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-              }}
-            />
-          <Section>
+          <Box
+            component="img"
+            src={hook}
+            sx={{
+              width: '100%', // Adjust the width as needed
+              height: 'auto', // Maintain aspect ratio
+              borderRadius: '10px',
+              mt: '16px', // Margin top
+              boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+            }}
+          />
+          <Section id="szolgaltatasok">
             <MyTypography>
-              Marketing fogas
+              Szolgáltatásaink
             </MyTypography>
           </Section>
-          <Section>
+          <Section id="rolunk">
             <MyTypography>
-              Szolgaltatasaink
+              Rólunk
             </MyTypography>
           </Section>
-          <Section>
+          <Section id="munkatarsak">
             <MyTypography>
-              Marketing fogas2
+              Munkatársak
             </MyTypography>
           </Section>
-          <Section>
+          <Section id="kapcsolat">
             <MyTypography>
-              Lepjen kapcsolatba velunk
-            </MyTypography>
-          </Section>
-          <Section>
-            <MyTypography>
-              Marketing fogas3
+              Kapcsolat
             </MyTypography>
           </Section>
         </MyPaper>
+        <BottomBar />
       </Container>
-      <BottomBar />
     </>
   )
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { AppBar, Toolbar, Typography, Button } from '@mui/material'
-import logo from '../assets/transparent_logo.png'
+import logo from '../assets/logo_tbg.png'
 import handleButtonClick from '../functions/handleButtonClick'
 
 const Appbar = () => {
@@ -36,7 +36,7 @@ const Appbar = () => {
         alignItems: 'center',
       }}
     >
-      <Button color="inherit" sx={{marginRight: 'auto', paddingLeft: '25px'}}>
+      <Button color="inherit" sx={{marginRight: 'auto', paddingLeft: '25px'}} onClick={() => handleButtonClick('top')}>
           <img src={logo} alt="logo" style={{height: '60px', marginRight: '8px'}} />
           <Typography
           variant='h6'
@@ -56,29 +56,24 @@ const Appbar = () => {
           gap: '24px', // Increase the spacing between buttons
         }}
       >
-        <Button color="inherit">
+        <Button color="inherit" onClick={() => handleButtonClick('szolgaltatasok')}>
             <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
-                kezdolap
+                Szolgáltatásaink
             </Typography>
         </Button>
-        <Button color="inherit">
+        <Button color="inherit" onClick={() => handleButtonClick('rolunk')}>
             <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
-                szolgaltatasaink
+                Rólunk
             </Typography>
         </Button>
-        <Button color="inherit">
+        <Button color="inherit" onClick={() => handleButtonClick('munkatarsak')}>
             <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
-                rolunk
+                Munkatársak
             </Typography>
         </Button>
-        <Button color="inherit" onClick={handleButtonClick}>
+        <Button color="inherit" onClick={() => handleButtonClick('kapcsolat')}>
             <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
-                munkatarsak
-            </Typography>
-        </Button>
-        <Button color="inherit">
-            <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
-                kapcsolat
+                Kapcsolat
             </Typography>
         </Button>
       </Toolbar>

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Box } from '@mui/material'
 
-const Section = ({ children, sx }) => {
+const Section = ({ children, id, sx }) => {
   return (
     <>
       <Box
+        id={id}
         sx={{
           padding: '16px',
           borderRadius: '16px',

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { AppBar, Toolbar, Typography, Button } from '@mui/material'
 import logo from '../assets/logo_tbg.png'
 import handleButtonClick from '../functions/handleButtonClick'
+import NavButton from './NavButton'
 
 const Appbar = () => {
   const [elevated, setElevated] = useState(false)
@@ -20,6 +21,13 @@ const Appbar = () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, [])
+
+  const navItems = [
+    { id: 'szolgaltatasok', label: 'Szolgáltatásaink' },
+    { id: 'rolunk', label: 'Rólunk' },
+    { id: 'munkatarsak', label: 'Munkatársak' },
+    { id: 'kapcsolat', label: 'Kapcsolat' },
+  ]
 
   return (
     <AppBar
@@ -56,26 +64,9 @@ const Appbar = () => {
           gap: '24px', // Increase the spacing between buttons
         }}
       >
-        <Button color="inherit" onClick={() => handleButtonClick('szolgaltatasok')}>
-            <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
-                Szolgáltatásaink
-            </Typography>
-        </Button>
-        <Button color="inherit" onClick={() => handleButtonClick('rolunk')}>
-            <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
-                Rólunk
-            </Typography>
-        </Button>
-        <Button color="inherit" onClick={() => handleButtonClick('munkatarsak')}>
-            <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
-                Munkatársak
-            </Typography>
-        </Button>
-        <Button color="inherit" onClick={() => handleButtonClick('kapcsolat')}>
-            <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
-                Kapcsolat
-            </Typography>
-        </Button>
+        {navItems.map((item) => (
+          <NavButton key={item.id} id={item.id} label={item.label} />
+        ))}
       </Toolbar>
     </AppBar>
   )

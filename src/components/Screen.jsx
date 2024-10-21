@@ -86,18 +86,7 @@ const Screen = () => {
             </MyTypography>
           </Section>
           <Section id="kapcsolat">
-            <MyTypography
-              sx={{
-                textAlign: 'center',
-                fontStyle: 'normal',
-                fontSize: '1.1rem',
-                fontWeight: 'normal',
-              }}
-            >
-              Vegye fel velünk a kapcsolatot, 
-              hogy mielőbb segíthessünk tervei megvalósításában.
-            </MyTypography>
-            <ContactForm></ContactForm>
+            <ContactForm />
           </Section>
         </MyPaper>
       </Container>

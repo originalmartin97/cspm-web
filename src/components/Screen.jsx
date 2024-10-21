@@ -1,11 +1,13 @@
-import { Container, Box } from '@mui/material'
+
 import React from 'react'
+import { Container, Box } from '@mui/material'
 import Appbar from './Appbar'
 import MyPaper from './MyPaper'
 import Section from './Section'
 import MyTypography from './MyTypography'
 import hook from '../assets/hook.png'
 import BottomBar from './BottomBar'
+import ContactForm from './ContactForm'
 
 const Screen = () => {
   return (
@@ -23,7 +25,13 @@ const Screen = () => {
         <MyPaper>
           <Section>
             <MyTypography>
-              Üdvözlő szöveg
+            <h1>Üdvözlöm Önt a Családod Pénzügyi Mentora oldalán!</h1>
+            <h4>
+              Kollégáimmal együtt feladatunk, hogy segítséget nyújtsunk 
+              minden érdeklődőnek és ügyfelünknek az anyagi stabilitásuk 
+              és 
+              jövőbeni céljaik biztonságos megvalósításához.
+            </h4>
             </MyTypography>
           </Section>
           <Box
@@ -38,8 +46,33 @@ const Screen = () => {
             }}
           />
           <Section id="szolgaltatasok">
-            <MyTypography>
-              Szolgáltatásaink
+            <MyTypography
+              sx={{
+                textAlign: 'left',
+                padding: '16px',
+                fontStyle: 'normal',
+                fontWeight: 'normal',
+              }}
+            >
+              <h2>Szolgáltatásaink</h2>
+              <h4>
+                -Baleset és betegség biztosítások magánszemélyeknek és 
+                vállalkozásoknak
+                <br />
+                -Megtakarítások magánszemélyeknek és vállalkozásoknak
+                <br />
+                -Gyermekbiztosítások
+                <br />
+                -Nyugdíjbiztosítások
+                <br />
+                -Személyikölcsönök
+                <br />
+                -Jelzáloghitelek
+                <br />
+                -Lakástakarék
+                <br />
+                -Folyószámlanyitás magánszemélyeknek és vállalkozásoknak
+              </h4>
             </MyTypography>
           </Section>
           <Section id="rolunk">
@@ -53,9 +86,18 @@ const Screen = () => {
             </MyTypography>
           </Section>
           <Section id="kapcsolat">
-            <MyTypography>
-              Kapcsolat
+            <MyTypography
+              sx={{
+                textAlign: 'center',
+                fontStyle: 'normal',
+                fontSize: '1.1rem',
+                fontWeight: 'normal',
+              }}
+            >
+              Vegye fel velünk a kapcsolatot, 
+              hogy mielőbb segíthessünk tervei megvalósításában.
             </MyTypography>
+            <ContactForm></ContactForm>
           </Section>
         </MyPaper>
       </Container>

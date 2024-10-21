@@ -87,8 +87,20 @@ const Appbar = () => {
           <MenuIcon />
         </IconButton>
       </AppBar>
-      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-        <List>
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={toggleDrawer(false)}
+        sx={{
+          backgroundColor: 'rgb(40, 68, 115, 0.25)',
+        }}
+        >
+        <List
+          sx={{
+            backgroundColor: 'rgb(254, 247, 255)',
+            height: '100%',
+          }}
+        >
           {navItems.map((item) => (
             <ListItem button key={item.id} onClick={() => {handleButtonClick(item.id); toggleDrawer(false)()}}>
               <ListItemText primary={item.label} />

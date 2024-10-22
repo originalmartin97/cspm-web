@@ -1,6 +1,5 @@
 import React from 'react'
 import { Paper } from '@mui/material'
-import Section from './Section'
 
 const MyPaper = ({ children }) => {
   return (

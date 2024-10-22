@@ -8,6 +8,7 @@ import MyTypography from './MyTypography'
 import hook from '../assets/hook.png'
 import BottomBar from './BottomBar'
 import ContactForm from './ContactForm'
+import Colleagues from './Colleagues'
 
 const Screen = () => {
   return (
@@ -84,6 +85,7 @@ const Screen = () => {
             <MyTypography>
               Munkatársak
             </MyTypography>
+            <Colleagues />
           </Section>
           <Section id="kapcsolat">
             <ContactForm />

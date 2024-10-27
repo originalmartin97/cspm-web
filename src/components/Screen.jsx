@@ -9,6 +9,8 @@ import hook from '../assets/hook.png'
 import BottomBar from './BottomBar'
 import ContactForm from './ContactForm'
 import Colleagues from './Colleagues'
+import MyFab from './MyFab'
+
 
 const Screen = () => {
   return (
@@ -92,6 +94,7 @@ const Screen = () => {
           </Section>
         </MyPaper>
       </Container>
+      <MyFab />
       <BottomBar />
     </>
   )

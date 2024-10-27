@@ -1,105 +1,67 @@
 import React, { useState } from 'react'
 import { Card, CardMedia, CardContent, Typography } from '@mui/material'
-import mkJulia from '../assets/mkJulia.jpg'
-import nkBenedek from '../assets/nkBenedek.jpg'
 import Grid from '@mui/material/Grid2'
 import MyButton from './MyButton'
+import colleaguesData from '../assets/colleaguesData'
 
 const Colleagues = () => {
-    const [expanded, setExpanded] = useState(false)
+  const [expandedId, setExpandedId] = useState(null)
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded)
-    }
+  const handleExpandClick = (id) => {
+    setExpandedId(expandedId === id ? null : id)
+  }
 
   return (
-    <Grid container spacing={3}
-        sx={{
-            height: 'auto',
-        }}
-    >    
+    <Grid container spacing={3}>
+      {colleaguesData.map((colleague) => (
         <Card
-            sx={{
-                maxWidth: 345,
-                height: 'auto',
-            }}
+          key={colleague.id}
+          sx={{
+            maxWidth: expandedId === colleague.id ? 600 : 345, // Adjust maxWidth based on expanded state
+            width: '100%', // Ensure the card takes up the full width of its container
+            transition: 'max-width 0.3s ease-in-out', // Smooth transition for expansion and contraction
+          }}
         >
-            <CardMedia
-                sx= {{ height: "auto" }}
-                component="img"
-                src={mkJulia}
-            >
-            </CardMedia>
-            <CardContent
-                sx={{ 
-                    display: 'flex',
-                    textAlign: 'center',
-                    flexDirection: 'column',
-                    height: 'auto',
-                }}
-            >
-                <Typography
-                    gutterBottom
-                    variant="h5"
-                    component="div"
-                >
-                    Mészárosné Kocsi Júlia
-                </Typography>
-                <Typography
-                    variant="body2"
-                    sx={{ textAlign: 'justify' }}
-                >
-                    {expanded
-                        ? `36 éves vagyok. Orvoslaboratóriumi analitikus a végzettségem és 13 éve 
-                            dolgozom az egészségügyben.
-                            A Metlife csapatát csak pár hónapja erősítem. A biztosítást azért választottam, mert látom a sok
-                            állami rendszerben eltöltött évemből és tapasztalatomból, mennyire fontos az öngondoskodás.
-                            Bízom benne, hogy a szaktudásommal hozzájárulhatok a sikerünkhöz és minél több
-                            ügyfelünknek segíthetünk.`
-                        : `36 éves vagyok. Orvoslaboratóriumi analitikus a végzettségem és 13 éve dolgozom az egészségügyben.`
-                    }
-                </Typography>
-                <MyButton onClick={handleExpandClick}
-                    sx={{
-                        padding: 'auto',
-                        marginTop: '6px',
-                    }}
-                >
-                    {expanded ? 'Kevesebb\n▲' : 'Több\n▼'}
-                </MyButton>
-            </CardContent>
-        </Card>
-        {/*
-        <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-            sx= {{ height: "auto" }}
+          <CardMedia
+            sx={{ height: "auto" }}
             component="img"
-            src={nkBenedek}
-        >
-        </CardMedia>
-        <CardContent>
+            src={colleague.image}
+          />
+          <CardContent
+            sx={{ 
+              display: 'flex',
+              textAlign: 'center',
+              flexDirection: 'column',
+            }}
+          >
             <Typography
-                gutterBottom
-                variant="h5"
-                component="div"
+              gutterBottom
+              variant="h5"
+              component="div"
             >
-                Nagy Benedek Károly
+              {colleague.name}
             </Typography>
             <Typography
-                variant="body2"
-                sx={{ textAlign: 'justify' }}
+              variant="body2"
+              sx={{ textAlign: 'justify' }}
             >
-                Nagy Benedek Károly vagyok, jogászhallgató, és a csapat legfiatalabb tagja. A biztosítások
-                területén újnak számítok, azonban kollégáimnak köszönhetően hamar felvettem a fonalat és
-                napról napra azon vagyok, hogy egyre jobban megismerjem ezt a területet. Véleményem szerint
-                manapság minden embernek szüksége van egy biztosításra, amely a nehéz helyzetekben
-                segítséget nyújt. Célom, hogy az ügyféllel közösen egy olyan valós segítséget nyújtó biztosítást
-                állítsunk össze, amely az ügyfél elégedettségét szolgálja és biztonságban tudhassa magát és
-                családtagjait.
+              {expandedId === colleague.id ? colleague.longDescription : colleague.shortDescription}
             </Typography>
-        </CardContent>
+            <CardContent
+              sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+              }}
+            >
+              <MyButton onClick={() => handleExpandClick(colleague.id)}>
+                {expandedId === colleague.id ? 'Kevesebb' : 'Több'}
+              </MyButton>
+            </CardContent>
+          </CardContent>
         </Card>
-        */}
+      ))}
     </Grid>
   )
 }

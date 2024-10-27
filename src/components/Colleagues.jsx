@@ -12,8 +12,16 @@ const Colleagues = () => {
   }
 
   return (
-    <Grid container spacing={3}>
-      {colleaguesData.map((colleague) => (
+    <Grid container spacing={4}
+        sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+        }}
+    >
+      {colleaguesData
+      .sort((a,b) => a.id - b.id) // Sort colleagues by id
+      .map((colleague) => (
         <Card
           key={colleague.id}
           sx={{
@@ -44,9 +52,12 @@ const Colleagues = () => {
             <Typography
               variant="body2"
               sx={{ textAlign: 'justify' }}
-            >
-              {expandedId === colleague.id ? colleague.longDescription : colleague.shortDescription}
-            </Typography>
+              dangerouslySetInnerHTML={{
+                __html: expandedId === colleague.id
+                  ? colleague.longDescription.replace(/\n/g, '<br />')
+                  : colleague.shortDescription.replace(/\n/g, '<br />')
+              }}
+            />
             <CardContent
               sx={{
                 display: 'flex',

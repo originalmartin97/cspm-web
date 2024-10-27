@@ -83,7 +83,7 @@ const Screen = () => {
           </Section>
           <Section id="munkatarsak">
             <MyTypography>
-              Munkatársak
+              Munkatársaink
             </MyTypography>
             <Colleagues />
           </Section>

@@ -1,7 +1,8 @@
 import React from 'react'
-import { TextField, Button } from '@mui/material'
+import { TextField } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 import MyTypography from './MyTypography'
+import MyButton from './MyButton'
 
 const ContactForm = () => {
   return (
@@ -67,9 +68,13 @@ const ContactForm = () => {
                 </TextField>
             </Grid>
         </Grid>
-        <Button>
+        <MyButton
+            sx={{
+                marginTop: '8px',
+            }}
+        >
             Küldés
-        </Button>
+        </MyButton>
     </>
   )
 }

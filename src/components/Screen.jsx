@@ -90,7 +90,7 @@ const Screen = () => {
             <Colleagues />
           </Section>
           <Section id="kapcsolat">
-            <ContactForm />
+            <ContactForm label="Kapcsolat" />
           </Section>
         </MyPaper>
       </Container>

@@ -13,7 +13,7 @@ const Career = ({ open, onClose }) => {
         disableEscapeKeyDown={false}
     >
         <Section>
-            <ContactForm />
+            <ContactForm label="Karrier"/>
         </Section>
     </Dialog>
   )

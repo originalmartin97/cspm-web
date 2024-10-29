@@ -93,7 +93,6 @@ const Appbar = () => {
               Karrier
             </Typography>
           </Button>
-          <Career open={careerOpen} onClose={handleClose} />
         </Toolbar>
         <IconButton
           color='inherit'
@@ -127,8 +126,12 @@ const Appbar = () => {
               <ListItemText primary={item.label} />
             </ListItem>
           ))}
+          <ListItem button key='karrier' onClick={handleClickOpen}>
+            <ListItemText primary='Karrier' />
+          </ListItem>
         </List>
       </Drawer>
+      <Career open={careerOpen} onClose={handleClose} />
     </>
   )
 }

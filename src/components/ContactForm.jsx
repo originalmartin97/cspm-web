@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid2'
 import MyTypography from './MyTypography'
 import MyButton from './MyButton'
 
-const ContactForm = ({ handleClose }) => {
+const ContactForm = ({ label }) => {
   return (
     <>
         <MyTypography
@@ -15,7 +15,7 @@ const ContactForm = ({ handleClose }) => {
                 fontWeight: 'bold',
             }}
         >
-            Kapcsolat
+            {label}
         </MyTypography>
         <MyTypography
               sx={{

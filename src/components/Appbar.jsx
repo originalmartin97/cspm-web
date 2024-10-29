@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
-import { IconButton, AppBar, Toolbar, Typography, Button, Drawer, List, ListItem, ListItemText } from '@mui/material'
+import { IconButton, AppBar, Toolbar, Typography, Button, Drawer,
+  List, ListItem, ListItemText } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import logo from '../assets/logo_tbg.png'
 import handleButtonClick from '../functions/handleButtonClick'
 import NavButton from './NavButton'
+import Career from './Career'
 
 const Appbar = () => {
   const [elevated, setElevated] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
+  const [careerOpen, setCareerOpen] = useState(false)
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -15,6 +18,14 @@ const Appbar = () => {
     } else {
       setElevated(false)
     }
+  }
+
+  const handleClickOpen = () => {
+    setCareerOpen(true)
+  }
+
+  const handleClose = () => {
+    setCareerOpen(false)
   }
 
   const toggleDrawer = (open) => () => {
@@ -73,6 +84,16 @@ const Appbar = () => {
           {navItems.map((item) => (
             <NavButton key={item.id} id={item.id} label={item.label} />
           ))}
+          <Button
+            id='karrier'
+            color='inherit'
+            onClick={handleClickOpen}
+          >
+            <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
+              Karrier
+            </Typography>
+          </Button>
+          <Career open={careerOpen} onClose={handleClose} />
         </Toolbar>
         <IconButton
           color='inherit'

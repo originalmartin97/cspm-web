@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid2'
 import MyTypography from './MyTypography'
 import MyButton from './MyButton'
 
-const ContactForm = () => {
+const ContactForm = ({ handleClose }) => {
   return (
     <>
         <MyTypography

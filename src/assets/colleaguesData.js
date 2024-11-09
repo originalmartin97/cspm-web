@@ -24,7 +24,7 @@ const colleaguesData = [
   {
     id: 2,
     name: 'Szépné Fekete Erzsébet',
-    shortDescription: ``,
+    shortDescription: `Több mint 40 évet dolgoztam a bankszektorban, ahol lakossági és kisvállalkozói hitelezéssel és támogatásokkal  valamint biztosítással  foglalkoztam...`,
     longDescription: `Több mint 40 évet dolgoztam a bankszektorban, ahol lakossági és kisvállalkozói hitelezéssel és támogatásokkal  valamint biztosítással  foglalkoztam. Mivel nyugdíjba vonulásom után a régi ügyfeleim megkerestek hitellel és biztosítással kapcsolatos kérdésekkel, úgy döntöttem, hogy - felhasználva a tapasztalataimat - vállalkozóként folytatom ezt a tevékenységet. 
                         
                         Miért érdemes  igénybe venni a  független hitel és biztosításközvetítő szolgáltatásait?
@@ -50,13 +50,6 @@ const colleaguesData = [
     shortDescription: ``,
     longDescription: ``,
     image: gkIlona,
-  },
-  {
-    id: 6,
-    name: 'Erős Tibor',
-    shortDescription: ``,
-    longDescription: ``,
-    image: '',
   },
 ]
 

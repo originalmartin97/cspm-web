@@ -5,12 +5,10 @@ import MenuIcon from '@mui/icons-material/Menu'
 import logo from '../assets/logo_tbg.png'
 import handleButtonClick from '../functions/handleButtonClick'
 import NavButton from './NavButton'
-import Career from './Career'
 
 const Appbar = () => {
   const [elevated, setElevated] = useState(false)
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const [careerOpen, setCareerOpen] = useState(false)
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -18,14 +16,6 @@ const Appbar = () => {
     } else {
       setElevated(false)
     }
-  }
-
-  const handleClickOpen = () => {
-    setCareerOpen(true)
-  }
-
-  const handleClose = () => {
-    setCareerOpen(false)
   }
 
   const toggleDrawer = (open) => () => {
@@ -87,7 +77,7 @@ const Appbar = () => {
           <Button
             id='karrier'
             color='inherit'
-            onClick={handleClickOpen}
+            onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdha8G4dTciwQmoiwAsoV2TD720PXWUKZZMg9f2Jr9VEHLcyg/viewform?usp=sf_link', '_blank')}
           >
             <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
               Karrier
@@ -126,12 +116,14 @@ const Appbar = () => {
               <ListItemText primary={item.label} />
             </ListItem>
           ))}
-          <ListItem button key='karrier' onClick={handleClickOpen}>
+          <ListItem button key='karrier' onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdha8G4dTciwQmoiwAsoV2TD720PXWUKZZMg9f2Jr9VEHLcyg/viewform?usp=sf_link', '_blank')}>
             <ListItemText primary='Karrier' />
           </ListItem>
         </List>
       </Drawer>
+      {/*
       <Career open={careerOpen} onClose={handleClose} />
+      */}
     </>
   )
 }

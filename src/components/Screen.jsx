@@ -78,11 +78,13 @@ const Screen = () => {
               </h4>
             </MyTypography>
           </Section>
+          {/*
           <Section id="rolunk">
             <MyTypography>
               Rólunk
             </MyTypography>
           </Section>
+          */}
           <Section id="munkatarsak">
             <MyTypography>
               Munkatársaink

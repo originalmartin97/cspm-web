@@ -46,7 +46,7 @@ const colleaguesData = [
   },
   {
     id: 1,
-    name: 'Gáborné Kaszás Ilona',
+    name: 'Kaszás Gáborné Ilona',
     shortDescription: ``,
     longDescription: ``,
     image: gkIlona,

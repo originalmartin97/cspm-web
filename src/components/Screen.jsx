@@ -10,6 +10,7 @@ import BottomBar from './BottomBar'
 import ContactForm from './ContactForm'
 import Colleagues from './Colleagues'
 import MyFab from './MyFab'
+import MyAccrodion from './MyAccordion'
 
 
 const Screen = () => {
@@ -48,6 +49,9 @@ const Screen = () => {
               boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
             }}
           />
+          <Section>
+            <MyAccrodion />
+          </Section>
           <Section id="szolgaltatasok">
             <MyTypography
               sx={{

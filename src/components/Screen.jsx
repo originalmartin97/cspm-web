@@ -1,16 +1,16 @@
-
 import React from 'react'
-import { Container, Box } from '@mui/material'
+import { Container } from '@mui/material'
 import Appbar from './Appbar'
 import MyPaper from './MyPaper'
 import Section from './Section'
 import MyTypography from './MyTypography'
-import hook from '../assets/hook.png'
 import BottomBar from './BottomBar'
 import ContactForm from './ContactForm'
 import Colleagues from './Colleagues'
 import MyFab from './MyFab'
 import MyAccrodion from './MyAccordion'
+import ImageSlider from './ImageSlider'
+
 
 
 const Screen = () => {
@@ -27,8 +27,8 @@ const Screen = () => {
         }}
       >
         <MyPaper>
+          <ImageSlider />
             <MyTypography>
-            <h1>Üdvözlöm Önt a Családod Pénzügyi Mentora oldalán!</h1>
             <h4>
               Kollégáimmal együtt feladatunk, hogy segítséget nyújtsunk 
               minden érdeklődőnek és ügyfelünknek az anyagi stabilitásuk 
@@ -36,17 +36,6 @@ const Screen = () => {
               jövőbeni céljaik biztonságos megvalósításához.
             </h4>
             </MyTypography>
-          <Box
-            component="img"
-            src={hook}
-            sx={{
-              width: '100%', // Adjust the width as needed
-              height: 'auto', // Maintain aspect ratio
-              borderRadius: '10px',
-              mt: '16px', // Margin top
-              boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-            }}
-          />
           <Section id="szolgaltatasok">
             <MyTypography>
               Szolgáltatásaink

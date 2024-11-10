@@ -1,24 +1,31 @@
 import React from 'react'
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-
+import Accordion from '@mui/material/Accordion'
+import AccordionSummary from '@mui/material/AccordionSummary'
+import AccordionDetails from '@mui/material/AccordionDetails'
+import Typography from '@mui/material/Typography'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import servicesData from '../assets/servicesData'
 
 const MyAccordion = () => {
   return (
-    <Accordion>
-        <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-        >
-        </AccordionSummary>
-            <AccordionDetails>
-                <Typography>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                </Typography>
-            </AccordionDetails>
-    </Accordion>
+    <>
+      {servicesData.map((service, index) => (
+        <Accordion key={index}>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography>
+                {service.title}</Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Typography
+            sx={{ textAlign: 'justify' }}
+                dangerouslySetInnerHTML={{
+                    __html: service.description.replace(/\n/g, '<br />')
+                }}
+            />
+          </AccordionDetails>
+        </Accordion>
+      ))}
+    </>
   )
 }
 

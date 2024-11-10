@@ -27,7 +27,6 @@ const Screen = () => {
         }}
       >
         <MyPaper>
-          <Section>
             <MyTypography>
             <h1>Üdvözlöm Önt a Családod Pénzügyi Mentora oldalán!</h1>
             <h4>
@@ -37,7 +36,6 @@ const Screen = () => {
               jövőbeni céljaik biztonságos megvalósításához.
             </h4>
             </MyTypography>
-          </Section>
           <Box
             component="img"
             src={hook}
@@ -49,52 +47,19 @@ const Screen = () => {
               boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
             }}
           />
-          <Section>
+          <Section id="szolgaltatasok">
+            <MyTypography>
+              Szolgáltatásaink
+            </MyTypography>
             <MyAccrodion />
           </Section>
-          <Section id="szolgaltatasok">
-            <MyTypography
-              sx={{
-                textAlign: 'left',
-                padding: '16px',
-                fontStyle: 'normal',
-                fontWeight: 'normal',
-              }}
-            >
-              <h2>Szolgáltatásaink</h2>
-              <h4>
-                -Baleset és betegség biztosítások magánszemélyeknek és 
-                vállalkozásoknak
-                <br />
-                -Megtakarítások magánszemélyeknek és vállalkozásoknak
-                <br />
-                -Gyermekbiztosítások
-                <br />
-                -Nyugdíjbiztosítások
-                <br />
-                -Személyikölcsönök
-                <br />
-                -Jelzáloghitelek
-                <br />
-                -Lakástakarék
-                <br />
-                -Folyószámlanyitás magánszemélyeknek és vállalkozásoknak
-              </h4>
-            </MyTypography>
-          </Section>
-          {/*
-          <Section id="rolunk">
-            <MyTypography>
-              Rólunk
-            </MyTypography>
-          </Section>
-          */}
           <Section id="munkatarsak">
             <MyTypography>
               Munkatársaink
             </MyTypography>
             <Colleagues />
           </Section>
+          
           <Section id="kapcsolat">
             <ContactForm label="Kapcsolat" />
           </Section>

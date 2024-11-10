@@ -12,11 +12,12 @@ const Colleagues = () => {
   }
 
   return (
-    <Grid container spacing={4}
+    <Grid container spacing={6}
         sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
+            marginTop: '16px',
         }}
     >
       {colleaguesData

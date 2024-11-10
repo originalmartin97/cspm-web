@@ -9,7 +9,9 @@ const Section = ({ children, id, sx }) => {
         sx={{
           padding: '16px',
           borderRadius: '16px',
-          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+          boxShadow: '0 0 16px rgba(0, 0, 0, 0.1)',
+          marginTop: '16px',
+          backgroundColor: 'rgb(195, 224, 228, 0.7)',
           ...sx,
         }}
       >

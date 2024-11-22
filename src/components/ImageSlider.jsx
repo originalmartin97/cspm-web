@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 
 const images = [
-    require('../assets/udv.png'),
-    require('../assets/hook.png'),
-    require('../assets/background.png'),
-    require('../assets/placeholder.png'),
+    require('../assets/adbar/udv.png'),
+    require('../assets/adbar/hook.png'),
+    require('../assets/adbar/background.png'),
+    require('../assets/adbar/logo_tbg.png'),
 ];
 
 const ImageSlider = () => {

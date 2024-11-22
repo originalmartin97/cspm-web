@@ -40,8 +40,10 @@ const colleaguesData = [
   {
     id: 4,
     name: 'Major Lilla',
-    shortDescription: ``,
-    longDescription: ``,
+    shortDescription: `Major Lilla vagyok, eredeti végzettségemet tekintve közgazdász, és kertészmérnök. A diploma megszerzése után Magyarország egyik vezető bankjánál helyezkedtem el...`,
+    longDescription: `Major Lilla vagyok, eredeti végzettségemet tekintve közgazdász, és kertészmérnök. A diploma megszerzése után Magyarország egyik vezető bankjánál helyezkedtem el, a bank Telefonos Ügyfélszolgálatnál, későbbiekben bankfiókban segítettem az ügyfeleket a pénzügyi világban kalauzolni. Tevékenységem széles körű volt, a lakossági és a vállalati ügyfelekkel is foglalkoztam, a számlanyitástól, egészen a hitelezésig.
+                      Közel 2 éve döntöttem úgy, hogy a pénzügyi világból nem szeretnék kiszakadni, szeretek az embereknek segíteni, de ezt nem a bank szigorúan vett négy fala között folytatnám, hanem kicsit szabadabb, személyre szólóbb módon tenném, így kerültem a Családod Pénzügyi Mentora Csapatába, ahol elsődlegesen Hitel és bankügyletekben, és ehhez kapcsolódóan biztosítási területen is nagyon szívesen segítek az érdeklődőknek.
+                      Főbb területeim a személyi kölcsönök, hitelkiváltások, jelzálog ügyintézések, bankszámla kérdések, és természetesen az ehhez kapcsolódó biztosítások, akár cégként, akár magánemberként, így komplex pénzügyi segítséget vehet igénybe egy személytől.`,
     image: mLilla,
   },
   {

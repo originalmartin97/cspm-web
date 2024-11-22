@@ -31,7 +31,6 @@ const Appbar = () => {
 
   const navItems = [
     { id: 'szolgaltatasok', label: 'Szolgáltatásaink' },
-    { id: 'rolunk', label: 'Rólunk' },
     { id: 'munkatarsak', label: 'Munkatársaink' },
     { id: 'kapcsolat', label: 'Kapcsolat' },
   ]

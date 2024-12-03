@@ -28,6 +28,17 @@ const ContactForm = ({ label }) => {
               Vegye fel velünk a kapcsolatot, 
               hogy mielőbb segíthessünk tervei megvalósításában.
         </MyTypography>
+        <MyTypography
+              sx={{
+                textAlign: 'center',
+                fontStyle: 'normal',
+                fontSize: '1.1rem',
+                fontWeight: 'normal',
+              }}
+            >
+              *A megadott személyes adatait a törvényi előírásoknak megfelelően és bizalmasan kezeljük.
+        </MyTypography>
+{/*
         <Grid container spacing={1}>
             <Grid size={6}>
                 <TextField
@@ -68,12 +79,13 @@ const ContactForm = ({ label }) => {
                 </TextField>
             </Grid>
         </Grid>
+*/}
         <MyButton
-            sx={{
-                marginTop: '8px',
-            }}
+            id='kapcsolat'
+            color='inherit'
+            onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSfIH3fuCWL_t84PaJnbd46fBHYhapDi5AHp24fczjalitjGSA/viewform?usp=sf_link', '_blank')}
         >
-            Küldés
+              Kapcsolat
         </MyButton>
     </>
   )

@@ -49,8 +49,37 @@ const colleaguesData = [
   {
     id: 1,
     name: 'Kaszás Gáborné Ilona',
-    shortDescription: ``,
-    longDescription: ``,
+    shortDescription: `Több, mint 20 éve kezdtem a családok pénzügyi biztonságával, tanácsadással...`,
+    longDescription: `Több, mint 20 éve kezdtem a családok pénzügyi biztonságával, tanácsadással
+                      közvetítéssel foglalkozni.
+                      Mérnöki és közgazdasági diplomával a szolgáltatói
+                      szektorban eltöltött 20 év összes gyakorlati tapasztalatát felhasználtam ügyfeleim
+                      legjobb kiszolgálásához.
+
+
+                      Teljeskörű pénzügyi elemzéssel segítem ügyfeleimet:
+
+                      - Biztosítási védelem kidolgozása
+                      - hosszútávú megtakarításitervek kidolgozása
+                      - finanszírozási javaslatok a legmegfelelőbb hitel konstrukció megtalálásával
+
+
+                      Sokéves vezetői és értékesítési tapasztalatommal kollégáim tudását fejlesztem és
+                      segítem Őket a napi munkájukban.
+
+                      Hitvallásunk, hogy az ügyfél szándéka, akarata az első.
+                      Ügyfeleinkkel hosszútávú bizalmi kapcsolat kialakítására törekszünk és folyamatosan
+                      rendelkezésükre állunk.
+
+
+                      Fordulj hozzánk bizalommal, ha:
+                      - a helyzetedhez legjobban illeszkedő megoldásokat szeretnél;
+                      - a legköltséghatékonabb biztosítást szeretnéd;
+                      - a megtakarításaidhoz rendszeres segítséget szeretnél kapni
+                      - a hitelek közül a számodra a legjobbat szeretnéd.
+
+                      
+                      Garantáljuk az ügyfélcentrikus kiszolgálást.`,
     image: gkIlona,
   },
 ]

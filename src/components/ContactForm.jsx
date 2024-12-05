@@ -23,6 +23,7 @@ const ContactForm = ({ label }) => {
                 fontStyle: 'normal',
                 fontSize: '1.1rem',
                 fontWeight: 'normal',
+                marginBottom: '0rem',
               }}
             >
               Vegye fel velünk a kapcsolatot, 
@@ -32,8 +33,8 @@ const ContactForm = ({ label }) => {
               sx={{
                 textAlign: 'center',
                 fontStyle: 'normal',
-                fontSize: '1.1rem',
-                fontWeight: 'normal',
+                fontSize: '0.8rem',
+                fontWeight: 'light',
               }}
             >
               *A megadott személyes adatait a törvényi előírásoknak megfelelően és bizalmasan kezeljük.
@@ -84,8 +85,12 @@ const ContactForm = ({ label }) => {
             id='kapcsolat'
             color='inherit'
             onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSfIH3fuCWL_t84PaJnbd46fBHYhapDi5AHp24fczjalitjGSA/viewform?usp=sf_link', '_blank')}
+            sx={{
+                display: 'block',
+                margin: 'auto',
+            }}
         >
-              Kapcsolat
+              Kapcsolatfelvétel
         </MyButton>
     </>
   )

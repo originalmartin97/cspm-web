@@ -7,7 +7,7 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import servicesData from '../assets/servicesData'
 import { Typography } from '@mui/material'
 
-const MyAccordion = () => {
+const Services = () => {
   return (
     <>
       {servicesData.map((service, index) => (
@@ -45,4 +45,4 @@ const MyAccordion = () => {
   )
 }
 
-export default MyAccordion
+export default Services

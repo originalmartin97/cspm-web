@@ -8,8 +8,9 @@ import BottomBar from './BottomBar'
 import ContactForm from './ContactForm'
 import Colleagues from './Colleagues'
 import MyFab from './MyFab'
-import MyAccrodion from './MyAccordion'
+import Services from './Services'
 import ImageSlider from './ImageSlider'
+import Actualities from './Actualities'
 
 
 
@@ -29,18 +30,24 @@ const Screen = () => {
         <MyPaper>
           <ImageSlider />
             <MyTypography>
-            <h4>
+            <h6>
               Kollégáimmal együtt feladatunk, hogy segítséget nyújtsunk 
               minden érdeklődőnek és ügyfelünknek az anyagi stabilitásuk 
               és 
               jövőbeni céljaik biztonságos megvalósításához.
-            </h4>
+            </h6>
             </MyTypography>
+          <Section id="szolgaltatasok">
+            <MyTypography>
+              Aktuális híreink
+            </MyTypography>
+            <Actualities />
+          </Section>
           <Section id="szolgaltatasok">
             <MyTypography>
               Szolgáltatásaink
             </MyTypography>
-            <MyAccrodion />
+            <Services />
           </Section>
           <Section id="munkatarsak">
             <MyTypography>

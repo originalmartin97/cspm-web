@@ -3,8 +3,9 @@ import { Box } from '@mui/material';
 
 const images = [
     require('../assets/adbar/udv.png'),
-    require('../assets/adbar/hook.png'),
+    require('../assets/adbar/ugyfelklub.png'),
     require('../assets/adbar/onyp_web.png'),
+    require('../assets/adbar/hook.png'),
 ];
 
 const ImageSlider = () => {

@@ -48,7 +48,9 @@ const Actualities = () => {
           </Box>
           <br />
           <MyTypography>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSe0U_T2eMmkziUZjmhvGZSIKLY2OpTBJTiLRMfoy0FGFQM7RQ/viewform?usp=header">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSe0U_T2eMmkziUZjmhvGZSIKLY2OpTBJTiLRMfoy0FGFQM7RQ/viewform?usp=header"
+          target='_blank' rel='noreferrer'
+          >
           Regisztrációhoz kattintson ide!
           </a>
           </MyTypography>

@@ -5,78 +5,73 @@ import AccordionDetails from '@mui/material/AccordionDetails'
 import MyTypography from './MyTypography'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ReactMarkdown from 'react-markdown'
-import onypContent from '../assets/actualities/onyp.md'
-import ugyfelklubImage from '../assets/actualities/ugyfelklub.png'
 
+// Import your markdown files
+import onypContent from '../assets/actualities/onyp.md'
+import szkolcsonContent from '../assets/actualities/szemelyi_kolcson.md'
+import penzugyKarrierLehetosegContent from '../assets/actualities/penzugy_karrier_hirdetes.md'
+
+const contents = [
+  { title: 'Nyugdíjpénztár felhasználása lakáscélokra', path: onypContent },
+  { title: 'Személyi kölcsön', path: szkolcsonContent },
+  { title: 'Karrier lehetőség', path: penzugyKarrierLehetosegContent },
+]
 
 const Actualities = () => {
-  const [content, setContent] = useState('')
+  const [content, setContent] = useState({})
 
   useEffect(() => {
-    fetch(onypContent)
-      .then((response) => response.text())
-      .then((text) => setContent(text))
+    contents.forEach((item) => {
+      fetch(item.path)
+        .then((response) => response.text())
+        .then((text) => {
+          setContent((prevContent) => ({
+            ...prevContent,
+            [item.title]: text,
+          }))
+        })
+    })
   }, [])
 
   return (
     <>
-{/*
-      <Accordion>
-        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-          <MyTypography
-            sx={{
-              fontSize: '1.5rem',
-              textAlign: 'center',
-            }}
-          >
-            Ügyfélklub esemény
-          </MyTypography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <img
-            component="img"
-            src={ ugyfelklubImage }
-            alt="Ügyfélklub esemény promóciós kép"
-            width="100%"
-            onError={(e) => console.error('Image not found:', e.target.src)}
-          />
-          <br />
-          <MyTypography>
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSe0U_T2eMmkziUZjmhvGZSIKLY2OpTBJTiLRMfoy0FGFQM7RQ/viewform?usp=header"
-          target='_blank' rel='noreferrer'
-          >
-          Regisztrációhoz kattintson ide!
-          </a>
-          </MyTypography>
-        </AccordionDetails>
-      </Accordion>
-*/}
-
-      <Accordion
-        sx={{
-          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-          borderRadius: '10px',
-          my: '8px',
-          '&:before': {
-            display: 'none',
-          },
-        }}
-      >
-        <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
-          <MyTypography
-            sx={{
-              fontSize: '1.5rem',
-              textAlign: 'center',
-            }}
-          >
-            Nyugdíjpénztár felhasználása lakáscélokra
-          </MyTypography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ReactMarkdown>{content}</ReactMarkdown>
-        </AccordionDetails>
-      </Accordion>
-
+      {contents.map((item) => (
+        <Accordion
+          key={item.title}
+          sx={{
+            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+            borderRadius: '10px',
+            my: '8px',
+            '&:before': {
+              display: 'none',
+            },
+          }}
+        >
+          <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
+            <MyTypography
+              sx={{
+                fontSize: '1.5rem',
+                textAlign: 'center',
+              }}
+            >
+              {item.title}
+            </MyTypography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <ReactMarkdown
+              components={{
+                a: ({ node, ...props }) => (
+                  <a {...props} target="_blank" rel="noopener noreferrer">
+                    {props.children}
+                  </a>
+                ),
+              }}
+            >
+              {content[item.title]}
+            </ReactMarkdown>
+          </AccordionDetails>
+        </Accordion>
+      ))}
     </>
   )
 }

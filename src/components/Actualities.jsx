@@ -20,7 +20,7 @@ const Actualities = () => {
 
   return (
     <>
-
+{/*
       <Accordion>
         <AccordionSummary expandIcon={<ArrowDropDownIcon />}>
           <MyTypography
@@ -50,6 +50,7 @@ const Actualities = () => {
           </MyTypography>
         </AccordionDetails>
       </Accordion>
+*/}
 
       <Accordion
         sx={{

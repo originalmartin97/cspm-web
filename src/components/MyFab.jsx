@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Fab from '@mui/material/Fab'
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
-import handleButtonClick from '../functions/handleButtonClick'
+import handleButtonClickNavigation from '../functions/handleButtonClickNavigation'
 
 
 // MyFab component definition
@@ -51,7 +51,7 @@ const MyFab = () => {
           color: 'rgb(254, 247, 255)', // Custom text/icon color
           display: visible ? 'flex' : 'none', // Show or hide based on visibility state
         }}
-        onClick={() => handleButtonClick('top')} // Handle button click to scroll to top
+        onClick={() => handleButtonClickNavigation('top')} // Handle button click to scroll to top
       >
         <ArrowDropUpIcon /> {/* Up arrow icon inside the button */}
       </Fab>

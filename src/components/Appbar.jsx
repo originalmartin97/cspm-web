@@ -3,7 +3,7 @@ import { IconButton, AppBar, Toolbar, Typography, Button, Drawer,
   List, ListItem, ListItemText } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import logo from '../assets/logo_tbg.png'
-import handleButtonClick from '../functions/handleButtonClick'
+import handleButtonClickNavigation from '../functions/handleButtonClickNavigation'
 import NavButton from './NavButton'
 
 const Appbar = () => {
@@ -51,7 +51,7 @@ const Appbar = () => {
           alignItems: 'center',
         }}
       >
-        <Button color="inherit" sx={{marginRight: 'auto'}} onClick={() => handleButtonClick('top')}>
+        <Button color="inherit" sx={{marginRight: 'auto'}} onClick={() => handleButtonClickNavigation('top')}>
             <img src={logo} alt="logo" style={{height: '60px', marginRight: '8px'}} />
             <Typography
             variant='h6'
@@ -111,7 +111,7 @@ const Appbar = () => {
           }}
         >
           {navItems.map((item) => (
-            <ListItem button key={item.id} onClick={() => {handleButtonClick(item.id); toggleDrawer(false)()}}>
+            <ListItem button key={item.id} onClick={() => {handleButtonClickNavigation(item.id); toggleDrawer(false)()}}>
               <ListItemText primary={item.label} />
             </ListItem>
           ))}

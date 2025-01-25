@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import { Container } from '@mui/material'
 import Appbar from './Appbar'
 import MyPaper from './MyPaper'
@@ -17,10 +18,12 @@ import Actualities from './Actualities'
 const Screen = () => {
   return (
     <>
+      <Helmet>
+        <link rel="canonical" href="https://csaladodpenzugyimentora.hu/" />
+      </Helmet>
       <Appbar />
       <Container
         sx={{
-          display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           marginTop: '76px',

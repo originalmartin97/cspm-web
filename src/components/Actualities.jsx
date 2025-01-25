@@ -6,7 +6,6 @@ import MyTypography from './MyTypography'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import ReactMarkdown from 'react-markdown'
 import onypContent from '../assets/actualities/onyp.md'
-import { Box } from '@mui/material'
 import ugyfelklubImage from '../assets/actualities/ugyfelklub.png'
 
 
@@ -34,18 +33,13 @@ const Actualities = () => {
           </MyTypography>
         </AccordionSummary>
         <AccordionDetails>
-          <Box
+          <img
             component="img"
-            src={ugyfelklubImage}
+            src={ ugyfelklubImage }
             alt="Ügyfélklub esemény promóciós kép"
-            sx={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
+            width="100%"
             onError={(e) => console.error('Image not found:', e.target.src)}
-          >
-          </Box>
+          />
           <br />
           <MyTypography>
           <a href="https://docs.google.com/forms/d/e/1FAIpQLSe0U_T2eMmkziUZjmhvGZSIKLY2OpTBJTiLRMfoy0FGFQM7RQ/viewform?usp=header"

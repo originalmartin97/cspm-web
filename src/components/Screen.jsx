@@ -40,9 +40,9 @@ const Screen = () => {
               jövőbeni céljaik biztonságos megvalósításához.
             </h6>
             </MyTypography>
-          <Section id="szolgaltatasok">
+          <Section id="actualities">
             <MyTypography>
-              Aktuális híreink
+              Aktuális információk
             </MyTypography>
             <Actualities />
           </Section>

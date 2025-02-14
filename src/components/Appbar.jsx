@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { IconButton, AppBar, Toolbar, Typography, Button, Drawer,
   List, ListItem, ListItemText } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
-import logo from '../assets/logo_tbg.png'
+import logo from '../assets/favico_transparent_new.png'
 import handleButtonClickNavigation from '../functions/handleButtonClickNavigation'
 import NavButton from './NavButton'
 

@@ -10,8 +10,10 @@ import ReactMarkdown from 'react-markdown'
 import onypContent from '../assets/actualities/onyp.md'
 import szkolcsonContent from '../assets/actualities/szemelyi_kolcson.md'
 import penzugyKarrierLehetosegContent from '../assets/actualities/penzugy_karrier_hirdetes.md'
+import allampapirokContent from '../assets/actualities/allampapirok.md'
 
 const contents = [
+  { title: 'Állampapírok vagy Befektetés + Biztosítás', path: allampapirokContent },
   { title: 'Nyugdíjpénztár felhasználása lakáscélokra', path: onypContent },
   { title: 'Személyi kölcsön', path: szkolcsonContent },
   { title: 'Karrier lehetőség', path: penzugyKarrierLehetosegContent },

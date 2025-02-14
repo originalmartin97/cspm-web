@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 const images = [
     require('../assets/adbar/udv.png'),
-    require('../assets/adbar/onyp_web.png'),
+    require('../assets/adbar/allampapirok.png'),
     require('../assets/adbar/szemelyi_kolcson.png'),
     require('../assets/adbar/karrier_lehetoseg.png'),
     require('../assets/adbar/hook.png'),

@@ -3,6 +3,8 @@ import { IconButton, AppBar, Toolbar, Typography, Button, Drawer,
   List, ListItem, ListItemText } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import logo from '../assets/favico_transparent_new.png'
+import instagram_logo from '../assets/transparent_instagram_logo.png'
+import facebook_logo from '../assets/transparent_facebook_logo.png'
 import handleButtonClickNavigation from '../functions/handleButtonClickNavigation'
 import NavButton from './NavButton'
 
@@ -64,6 +66,15 @@ const Appbar = () => {
               CsPM
             </Typography>
         </Button>
+
+        <Button color="inherit" sx={{marginRight: 'auto'}} onClick={() => window.open('https://www.instagram.com/csaladod.penzugyi.mentora/', '_blank')}>
+            <img src={instagram_logo} alt="logo" style={{height: '40px'}} />
+        </Button>
+
+        <Button color="inherit" sx={{marginRight: 'auto'}} onClick={() => window.open('https://www.facebook.com/kaszas.gaborne', '_blank')}>
+            <img src={facebook_logo} alt="logo" style={{height: '40px'}} />
+        </Button>
+
         <Toolbar
           sx={{
             display: { xs: 'none', md: 'flex' },

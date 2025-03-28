@@ -42,7 +42,7 @@ const Screen = () => {
             </MyTypography>
           <Section id="actualities">
             <MyTypography>
-              Aktuális információk
+              Aktuális
             </MyTypography>
             <Actualities />
           </Section>

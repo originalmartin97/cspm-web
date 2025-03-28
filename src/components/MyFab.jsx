@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Fab from '@mui/material/Fab'
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import handleButtonClickNavigation from '../functions/handleButtonClickNavigation'
 
 
@@ -47,13 +47,17 @@ const MyFab = () => {
           bottom: 16, // 16px from the bottom
           right: 16, // 16px from the right
           zIndex: 1000, // High z-index to appear above other elements
-          backgroundColor: 'rgb(40, 68, 115)', // Custom background color
+          backgroundColor: 'rgba(40, 68, 115, 0.75)', // Custom background color
           color: 'rgb(254, 247, 255)', // Custom text/icon color
           display: visible ? 'flex' : 'none', // Show or hide based on visibility state
+          '&:hover': {
+            backgroundColor: 'rgba(40, 68, 115, 1)', // Darker background on hover
+            transition: 'background-color 0.3s ease-in-out', // Smooth transition effect
+          }
         }}
         onClick={() => handleButtonClickNavigation('top')} // Handle button click to scroll to top
       >
-        <ArrowDropUpIcon /> {/* Up arrow icon inside the button */}
+        <KeyboardArrowUpIcon /> {/* Up arrow icon inside the button */}
       </Fab>
     </>
   )

@@ -15,3 +15,6 @@ While forking is technically possible on GitHub, this repository is maintained s
 **Contact:**
 
 For any inquiries, please contact originalmartin97+github@gmail.com.
+
+___
+please be kind

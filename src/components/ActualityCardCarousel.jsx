@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   Box, 
   Card, 
@@ -15,6 +15,8 @@ import {
 } from '@mui/material';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CloseIcon from '@mui/icons-material/Close';
 import ReactMarkdown from 'react-markdown';
 import actualityData from '../assets/actualityData';
@@ -29,23 +31,74 @@ const ActualityCardCarousel = () => {
   const [loading, setLoading] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [controlsHovered, setControlsHovered] = useState(false);
+  const [showLeftButton, setShowLeftButton] = useState(false);
+  const [showRightButton, setShowRightButton] = useState(false);
   const carouselRef = useRef(null);
+  const modalContentRef = useRef(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // Memoize the handler functions
+  const handleNextCardCallback = useCallback((e, autoScroll = false) => {
+    handleNextCard(e, autoScroll);
+  }, []);
+
+  const handleModalNavigationCallback = useCallback((direction) => {
+    const navigateModal = async (direction) => {
+      setLoading(true);
+      
+      // Find current actuality index in the data array
+      const currentActualityIndex = actualityData.findIndex(
+        item => selectedActuality && item.id === selectedActuality.id
+      );
+      
+      // Calculate next index based on direction
+      let nextIndex;
+      if (direction === 'next') {
+        nextIndex = (currentActualityIndex + 1) % actualityData.length;
+      } else {
+        nextIndex = currentActualityIndex === 0 
+          ? actualityData.length - 1 
+          : currentActualityIndex - 1;
+      }
+      
+      // Get the next actuality
+      const nextActuality = actualityData[nextIndex];
+      setSelectedActuality(nextActuality);
+      
+      // Load content for the next actuality
+      try {
+        const response = await fetch(nextActuality.contentPath);
+        const text = await response.text();
+        setMarkdownContent(text);
+      } catch (error) {
+        console.error("Failed to load markdown content:", error);
+        setMarkdownContent('Failed to load content');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    navigateModal(direction);
+  }, [selectedActuality]);
+
+  const handleKeyDownCallback = useCallback((e) => {
+    handleKeyDown(e);
+  }, []);
 
   // Auto-scroll effect
   useEffect(() => {
     let interval;
     if (!isHovering && !modalOpen && !isTransitioning && !controlsHovered) {
       interval = setInterval(() => {
-        handleNextCard(null, true);
+        handleNextCardCallback(null, true);
       }, 5000);
     }
 
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isHovering, modalOpen, isTransitioning, controlsHovered]);
+  }, [isHovering, modalOpen, isTransitioning, controlsHovered, handleNextCardCallback]);
 
   // Handle manual navigation with transition management
   const handlePrevCard = (e, autoScroll = false) => {
@@ -99,6 +152,10 @@ const ActualityCardCarousel = () => {
     setMarkdownContent('');
   };
 
+  const handleModalNavigation = (direction) => {
+    handleModalNavigationCallback(direction);
+  };
+
   // Handle keyboard navigation
   const handleKeyDown = (e) => {
     if (modalOpen) return;
@@ -110,23 +167,99 @@ const ActualityCardCarousel = () => {
     }
   };
 
+  // Modal keyboard navigation
+  useEffect(() => {
+    const handleModalKeyDown = (e) => {
+      if (modalOpen && !loading) {
+        if (e.key === 'ArrowLeft') {
+          handleModalNavigationCallback('prev');
+        } else if (e.key === 'ArrowRight') {
+          handleModalNavigationCallback('next');
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleModalKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleModalKeyDown);
+    };
+  }, [modalOpen, loading, selectedActuality, handleModalNavigationCallback]);
+
   // Setup keyboard event listeners
   useEffect(() => {
-    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleKeyDownCallback);
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDownCallback);
     };
-  }, [modalOpen, isTransitioning]);
+  }, [modalOpen, isTransitioning, handleKeyDownCallback]);
 
   // Touch swipe handlers
   const swipeHandlers = useSwipeable({
-    onSwipedUp: () => handleNextCard(null),
-    onSwipedDown: () => handlePrevCard(null),
-    onSwipedLeft: () => isMobile && handleNextCard(null),
-    onSwipedRight: () => isMobile && handlePrevCard(null),
+    // Only use vertical swipes on desktop
+    onSwipedUp: () => !isMobile && handleNextCard(null),
+    onSwipedDown: () => !isMobile && handlePrevCard(null),
+    // Use horizontal swipes on all devices, but they're especially important for mobile
+    onSwipedLeft: () => handleNextCard(null),
+    onSwipedRight: () => handlePrevCard(null),
     preventDefaultTouchmoveEvent: true,
     trackMouse: true
   });
+
+  // Modal swipe handlers for mobile users
+  const modalSwipeHandlers = useSwipeable({
+    onSwipedLeft: () => !loading && handleModalNavigation('next'),
+    onSwipedRight: () => !loading && handleModalNavigation('prev'),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: false
+  });
+
+  // Mouse move handler for modal navigation buttons - Improved implementation
+  const handleModalMouseMove = (e) => {
+    if (!modalContentRef.current || loading) return;
+
+    // Make the buttons more persistent by tracking the entire document
+    const modalRect = modalContentRef.current.getBoundingClientRect();
+    const mouseX = e.clientX;
+    
+    // Check if we're near the left or right edge of the screen
+    const windowWidth = window.innerWidth;
+    const edgeThreshold = Math.min(150, windowWidth * 0.15); // 15% of window width or 150px max
+    
+    // Show left button when near the left edge of the screen
+    setShowLeftButton(mouseX < edgeThreshold || 
+                     (mouseX > modalRect.left && mouseX < modalRect.left + modalRect.width * 0.3));
+    
+    // Show right button when near the right edge of the screen
+    setShowRightButton(mouseX > windowWidth - edgeThreshold || 
+                      (mouseX > modalRect.left + modalRect.width * 0.7 && mouseX < modalRect.right));
+  };
+
+  // Replace handleModalMouseLeave with this less aggressive version
+  const handleModalMouseLeave = (e) => {
+    // Only hide buttons if the mouse left the entire window
+    // This ensures buttons remain visible when moving mouse toward them
+    if (e.clientX <= 0 || e.clientX >= window.innerWidth || 
+        e.clientY <= 0 || e.clientY >= window.innerHeight) {
+      setShowLeftButton(false);
+      setShowRightButton(false);
+    }
+  };
+
+  // Make modal navigation buttons always visible for some time after any user interaction
+  useEffect(() => {
+    if (modalOpen) {
+      // Show buttons whenever modal is open
+      setShowLeftButton(true);
+      setShowRightButton(true);
+      
+      // Ensure document-level mouse movement tracking
+      document.addEventListener('mousemove', handleModalMouseMove);
+      
+      return () => {
+        document.removeEventListener('mousemove', handleModalMouseMove);
+      };
+    }
+  }, [modalOpen]);
 
   // Handle direct navigation to a specific slide
   const handleGoToSlide = (index) => {
@@ -161,9 +294,11 @@ const ActualityCardCarousel = () => {
         sx={{
           height: { xs: '200px', sm: '250px', md: '300px', lg: '400px' },
           transition: 'transform 1s ease-in-out',
-          transform: `translateY(-${currentIndex * 100}%)`,
+          transform: isMobile 
+            ? `translateX(-${currentIndex * 100}%)` // Horizontal translation for mobile
+            : `translateY(-${currentIndex * 100}%)`, // Vertical translation for desktop
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: isMobile ? 'row' : 'column',
           width: '100%',
         }}
       >
@@ -249,7 +384,7 @@ const ActualityCardCarousel = () => {
                       textOverflow: 'ellipsis',
                       WebkitLineClamp: 3,
                       WebkitBoxOrient: 'vertical',
-                      display: '-webkit-box',
+                      WebkitBoxDisplay: '-webkit-box',
                     }}
                   >
                     {actuality.summary}
@@ -390,7 +525,7 @@ const ActualityCardCarousel = () => {
             },
           }}
         >
-          Swipe up/down to navigate
+          Swipe left/right to navigate
         </Box>
       )}
 
@@ -407,6 +542,10 @@ const ActualityCardCarousel = () => {
         }}
       >
         <Paper
+          ref={modalContentRef}
+          {...modalSwipeHandlers}
+          // Remove onMouseMove since we're using document-level tracking
+          onMouseLeave={(e) => handleModalMouseLeave(e)}
           sx={{
             width: { xs: '90%', sm: '80%', md: '70%' },
             maxHeight: '90vh',
@@ -432,10 +571,117 @@ const ActualityCardCarousel = () => {
               right: 8,
               top: 8,
               color: (theme) => theme.palette.grey[500],
+              zIndex: 2,
             }}
           >
             <CloseIcon />
           </IconButton>
+          
+          {/* Previous button - positioned on left side with improved visibility */}
+          <IconButton
+            aria-label="Previous actuality"
+            onClick={() => handleModalNavigation('prev')}
+            disabled={loading}
+            sx={{
+              position: 'fixed', // Changed to fixed positioning
+              left: { xs: 8, sm: 16 },
+              top: '50%',
+              transform: 'translateY(-50%)',
+              backgroundColor: 'rgba(0,0,0,0.5)', // Darker for better visibility
+              color: 'white',
+              padding: { xs: '8px', sm: '12px' }, // Larger clickable area
+              '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.7)',
+              },
+              transition: 'opacity 0.3s ease, background-color 0.2s ease',
+              opacity: isMobile || showLeftButton ? 0.9 : 0.3, // Always somewhat visible
+              visibility: 'visible', // Always visible
+              zIndex: 1500, // Higher z-index to ensure it's above other content
+            }}
+          >
+            <KeyboardArrowLeftIcon fontSize={isMobile ? "small" : "medium"} />
+          </IconButton>
+          
+          {/* Next button - positioned on right side with improved visibility */}
+          <IconButton
+            aria-label="Next actuality"
+            onClick={() => handleModalNavigation('next')}
+            disabled={loading}
+            sx={{
+              position: 'fixed', // Changed to fixed positioning
+              right: { xs: 8, sm: 16 },
+              top: '50%',
+              transform: 'translateY(-50%)',
+              backgroundColor: 'rgba(0,0,0,0.5)', // Darker for better visibility
+              color: 'white',
+              padding: { xs: '8px', sm: '12px' }, // Larger clickable area
+              '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.7)',
+              },
+              transition: 'opacity 0.3s ease, background-color 0.2s ease',
+              opacity: isMobile || showRightButton ? 0.9 : 0.3, // Always somewhat visible
+              visibility: 'visible', // Always visible
+              zIndex: 1500, // Higher z-index to ensure it's above other content
+            }}
+          >
+            <KeyboardArrowRightIcon fontSize={isMobile ? "small" : "medium"} />
+          </IconButton>
+          
+          {/* Mobile swipe hint - only shows briefly when modal opens on mobile */}
+          {isMobile && modalOpen && (
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                color: 'white',
+                padding: '8px 16px',
+                borderRadius: '20px',
+                fontSize: '0.9rem',
+                pointerEvents: 'none',
+                animation: 'fadeOut 2s forwards',
+                animationDelay: '1s',
+                zIndex: 10,
+                '@keyframes fadeOut': {
+                  '0%': { opacity: 1 },
+                  '100%': { opacity: 0 }
+                },
+              }}
+            >
+              Swipe left/right to navigate
+            </Box>
+          )}
+
+          {/* Desktop navigation hint - only shows briefly when modal opens on desktop */}
+          {!isMobile && modalOpen && (
+            <Box
+              sx={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                display: 'flex',
+                gap: 2,
+                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                color: 'white',
+                padding: '8px 16px',
+                borderRadius: '20px',
+                fontSize: '0.9rem',
+                pointerEvents: 'none',
+                animation: 'fadeOut 2s forwards',
+                animationDelay: '1s',
+                zIndex: 10,
+                '@keyframes fadeOut': {
+                  '0%': { opacity: 1 },
+                  '100%': { opacity: 0 }
+                },
+              }}
+            >
+              <KeyboardArrowLeftIcon /> Navigate with mouse or arrow keys <KeyboardArrowRightIcon />
+            </Box>
+          )}
           
           {loading ? (
             <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
@@ -496,8 +742,107 @@ const ActualityCardCarousel = () => {
               </Box>
             </>
           )}
+          
+          {/* Optional: Pagination indicator showing position in actuality list */}
+          {selectedActuality && (
+            <Box 
+              sx={{ 
+                display: 'flex', 
+                justifyContent: 'center', 
+                mt: 3,
+                gap: 1
+              }}
+            >
+              {actualityData.map((_, index) => (
+                <Box
+                  key={index}
+                  onClick={() => {
+                    if (!loading) {
+                      const targetActuality = actualityData[index];
+                      if (targetActuality.id !== selectedActuality.id) {
+                        setLoading(true);
+                        setSelectedActuality(targetActuality);
+                        
+                        fetch(targetActuality.contentPath)
+                          .then(response => response.text())
+                          .then(text => {
+                            setMarkdownContent(text);
+                          })
+                          .catch(error => {
+                            console.error("Failed to load markdown content:", error);
+                            setMarkdownContent('Failed to load content');
+                          })
+                          .finally(() => {
+                            setLoading(false);
+                          });
+                      }
+                    }
+                  }}
+                  aria-label={`Go to actuality ${index + 1}`}
+                  sx={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    backgroundColor: selectedActuality.id === actualityData[index].id
+                      ? 'rgba(0, 0, 0, 0.8)'
+                      : 'rgba(0, 0, 0, 0.3)',
+                    cursor: 'pointer',
+                    transition: 'transform 0.2s ease',
+                    '&:hover': {
+                      transform: 'scale(1.2)',
+                    },
+                  }}
+                />
+              ))}
+            </Box>
+          )}
         </Paper>
       </Modal>
+
+      {/* Persistent navigation buttons for mobile */}
+      {isMobile && !modalOpen && ( // Only show when modal is closed
+        <Box
+          sx={{
+            position: 'absolute',
+            bottom: 16,
+            left: 0,
+            right: 0,
+            display: 'flex',
+            justifyContent: 'space-between',
+            px: 2,
+            zIndex: 15,
+          }}
+        >
+          <IconButton
+            aria-label="Previous actuality (mobile)"
+            onClick={(e) => handlePrevCard(e)} // Fixed: use handlePrevCard instead
+            disabled={isTransitioning}
+            sx={{
+              backgroundColor: 'rgba(0,0,0,0.4)',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.6)',
+              },
+            }}
+          >
+            <KeyboardArrowLeftIcon />
+          </IconButton>
+          <IconButton
+            aria-label="Next actuality (mobile)"
+            onClick={(e) => handleNextCard(e)} // Fixed: use handleNextCard instead
+            disabled={isTransitioning}
+            sx={{
+              backgroundColor: 'rgba(0,0,0,0.4)',
+              color: 'white',
+              '&:hover': {
+                backgroundColor: 'rgba(0,0,0,0.6)',
+              },
+            }}
+          >
+            <KeyboardArrowRightIcon />
+          </IconButton>
+        </Box>
+      )}
     </Box>
   );
 };

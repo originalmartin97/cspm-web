@@ -10,10 +10,7 @@ import ContactForm from './ContactForm'
 import Colleagues from './Colleagues'
 import MyFab from './MyFab'
 import Services from './Services'
-import ImageSlider from './ImageSlider'
-import Actualities from './Actualities'
-
-
+import ActualityCardCarousel from './ActualityCardCarousel'
 
 const Screen = () => {
   return (
@@ -31,20 +28,19 @@ const Screen = () => {
         }}
       >
         <MyPaper>
-          <ImageSlider />
-            <MyTypography>
+          <MyTypography>
             <h6>
               Kollégáimmal együtt feladatunk, hogy segítséget nyújtsunk 
               minden érdeklődőnek és ügyfelünknek az anyagi stabilitásuk 
               és 
               jövőbeni céljaik biztonságos megvalósításához.
             </h6>
-            </MyTypography>
+          </MyTypography>
           <Section id="actualities">
             <MyTypography>
               Aktuális
             </MyTypography>
-            <Actualities />
+            <ActualityCardCarousel />
           </Section>
           <Section id="szolgaltatasok">
             <MyTypography>

@@ -6,13 +6,14 @@ import gkIlona from './gkIlona.jpg'
 
 
 const colleaguesData = [
-  {
+/*  {
     id: 3,
     name: 'Mészárosné Kocsi Júlia',
     shortDescription: '36 éves vagyok. Orvoslaboratóriumi analitikus a végzettségem és 13 éve dolgozom az egészségügyben...',
     longDescription: `36 éves vagyok. Orvoslaboratóriumi analitikus a végzettségem és 13 éve dolgozom az egészségügyben. A Metlife csapatát csak pár hónapja erősítem. A biztosítást azért választottam, mert látom a sok állami rendszerben eltöltött évemből és tapasztalatomból, mennyire fontos az öngondoskodás. Bízom benne, hogy a szaktudásommal hozzájárulhatok a sikerünkhöz és minél több ügyfelünknek segíthetünk.`,
     image: mkJulia,
   },
+*/
   {
     id: 5,
     name: 'Nagy Benedek Károly',

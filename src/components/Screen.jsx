@@ -55,6 +55,13 @@ const Screen = () => {
             <Colleagues />
           </Section>
           
+          <Section id="munkatarsak">
+            <MyTypography>
+              Munkatársaink
+            </MyTypography>
+            <Colleagues />
+          </Section>
+
           <Section id="kapcsolat">
             <ContactForm label="Kapcsolat" />
           </Section>

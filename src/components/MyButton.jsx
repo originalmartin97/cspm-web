@@ -7,7 +7,7 @@ const MyButton = ({children, sx, onClick}) => {
         sx={{
             backgroundColor: 'rgb(40, 68, 115)',
             color: 'rgb(254, 247, 255)',
-            borderRadius: '10px',
+            borderRadius: '12px',
             padding: '10px 20px',
             ...sx,
         }}

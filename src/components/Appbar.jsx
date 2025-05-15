@@ -88,6 +88,10 @@ const Appbar = () => {
           <Button
             id='karrier'
             color='inherit'
+            sx={{
+              backgroundColor: 'rgb(195, 224, 228, 0.7)',
+              borderRadius: '12px',
+            }}
             onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdha8G4dTciwQmoiwAsoV2TD720PXWUKZZMg9f2Jr9VEHLcyg/viewform?usp=sf_link', '_blank')}
           >
             <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>

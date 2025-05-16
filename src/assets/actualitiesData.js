@@ -3,9 +3,10 @@ import onypContent from './actualities/onyp.md';
 import szkolcsonContent from './actualities/szemelyi_kolcson.md';
 import penzugyKarrierLehetosegContent from './actualities/penzugy_karrier_hirdetes.md';
 import elderlyAd06Content from './actualities/elderly_ad_06.md';
+import udvContent from './actualities/udv.md';
 
 // Define your actuality data
-const actualityData = [
+const actualitesData = [
   {
     id: 1,
     title: 'Karrier lehetőség',
@@ -41,10 +42,17 @@ const actualityData = [
     image: require('./adbar/elderly_ad_06.png'),
     contentPath: elderlyAd06Content,
     summary: 'Most van itt az idő, hogy tegyél érte! Nyugdíjbiztosításainkkal biztonságban tudhatod a jövőd.'
-  }
+  },
+    {
+    id: 6,
+    title: 'Üdvözlöm a CsPM honlapján!',
+    image: require('./adbar/udv.png'),
+    contentPath: udvContent,
+    summary: 'Kollégáim és én azért dolgozunk, hogy Önnek a legjobb pénzügyi megoldásokat kínáljuk. Célunk, hogy segítsünk Önnek a pénzügyei kezelésében és a jövője biztosításában.'
+  },
 ];
 
 // Sort the array by id in descending order (highest/newest id first)
-actualityData.sort((a, b) => b.id - a.id);
+actualitesData.sort((a, b) => b.id - a.id);
 
-export default actualityData;
+export default actualitesData;

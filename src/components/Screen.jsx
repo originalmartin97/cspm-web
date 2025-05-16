@@ -10,7 +10,7 @@ import ContactForm from './ContactForm'
 import Colleagues from './Colleagues'
 import MyFab from './MyFab'
 import Services from './Services'
-import ActualityCardCarousel from './ActualityCardCarousel'
+import ActualitiesCardCarousel from './ActualitiesCardCarousel'
 import Achievements from './Achievements'
 
 const Screen = () => {
@@ -33,7 +33,7 @@ const Screen = () => {
             <MyTypography>
               Aktuális
             </MyTypography>
-            <ActualityCardCarousel />
+            <ActualitiesCardCarousel />
           </Section>
           <Section id="szolgaltatasok">
             <MyTypography>

@@ -19,7 +19,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CloseIcon from '@mui/icons-material/Close';
 import ReactMarkdown from 'react-markdown';
-import actualityData from '../assets/actualityData';
+import actualitiesData from '../assets/actualitiesData';
 import { useSwipeable } from 'react-swipeable';
 
 const ActualityCardCarousel = () => {
@@ -48,22 +48,22 @@ const ActualityCardCarousel = () => {
       setLoading(true);
       
       // Find current actuality index in the data array
-      const currentActualityIndex = actualityData.findIndex(
+      const currentActualityIndex = actualitiesData.findIndex(
         item => selectedActuality && item.id === selectedActuality.id
       );
       
       // Calculate next index based on direction
       let nextIndex;
       if (direction === 'next') {
-        nextIndex = (currentActualityIndex + 1) % actualityData.length;
+        nextIndex = (currentActualityIndex + 1) % actualitiesData.length;
       } else {
         nextIndex = currentActualityIndex === 0 
-          ? actualityData.length - 1 
+          ? actualitiesData.length - 1 
           : currentActualityIndex - 1;
       }
       
       // Get the next actuality
-      const nextActuality = actualityData[nextIndex];
+      const nextActuality = actualitiesData[nextIndex];
       setSelectedActuality(nextActuality);
       
       // Load content for the next actuality
@@ -107,7 +107,7 @@ const ActualityCardCarousel = () => {
     
     setIsTransitioning(true);
     setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? actualityData.length - 1 : prevIndex - 1
+      prevIndex === 0 ? actualitiesData.length - 1 : prevIndex - 1
     );
     
     setTimeout(() => {
@@ -120,7 +120,7 @@ const ActualityCardCarousel = () => {
     if (isTransitioning && !autoScroll) return;
     
     setIsTransitioning(true);
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % actualityData.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % actualitiesData.length);
     
     setTimeout(() => {
       setIsTransitioning(false);
@@ -302,7 +302,7 @@ const ActualityCardCarousel = () => {
           width: '100%',
         }}
       >
-        {actualityData.map((actuality, index) => (
+        {actualitiesData.map((actuality, index) => (
           <Box 
             key={actuality.id}
             sx={{
@@ -312,7 +312,7 @@ const ActualityCardCarousel = () => {
             }}
             role="group"
             aria-roledescription="slide"
-            aria-label={`${actuality.title} - Slide ${index + 1} of ${actualityData.length}`}
+            aria-label={`${actuality.title} - Slide ${index + 1} of ${actualitiesData.length}`}
             aria-hidden={currentIndex !== index}
           >
             <Card 
@@ -469,7 +469,7 @@ const ActualityCardCarousel = () => {
         role="tablist"
         aria-label="Carousel pagination"
       >
-        {actualityData.map((_, index) => (
+        {actualitiesData.map((_, index) => (
           <Box
             key={index}
             onClick={() => handleGoToSlide(index)}
@@ -753,12 +753,12 @@ const ActualityCardCarousel = () => {
                 gap: 1
               }}
             >
-              {actualityData.map((_, index) => (
+              {actualitiesData.map((_, index) => (
                 <Box
                   key={index}
                   onClick={() => {
                     if (!loading) {
-                      const targetActuality = actualityData[index];
+                      const targetActuality = actualitiesData[index];
                       if (targetActuality.id !== selectedActuality.id) {
                         setLoading(true);
                         setSelectedActuality(targetActuality);
@@ -783,7 +783,7 @@ const ActualityCardCarousel = () => {
                     width: '8px',
                     height: '8px',
                     borderRadius: '50%',
-                    backgroundColor: selectedActuality.id === actualityData[index].id
+                    backgroundColor: selectedActuality.id === actualitiesData[index].id
                       ? 'rgba(0, 0, 0, 0.8)'
                       : 'rgba(0, 0, 0, 0.3)',
                     cursor: 'pointer',

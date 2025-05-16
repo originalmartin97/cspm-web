@@ -36,6 +36,7 @@ const Appbar = () => {
     { id: 'szolgaltatasok', label: 'Szolgáltatásaink' },
     { id: 'munkatarsak', label: 'Munkatársaink' },
     { id: 'kapcsolat', label: 'Kapcsolat' },
+    { id: 'eredmenyek', label: 'Eredményeink'},
   ]
 
   return (

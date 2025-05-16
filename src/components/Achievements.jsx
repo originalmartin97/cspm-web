@@ -2,15 +2,9 @@ import React, { useState } from 'react'
 import { Card, CardMedia, CardContent, Typography } from '@mui/material'
 import Grid from '@mui/material/Grid2'
 import MyButton from './MyButton'
-import colleaguesData from '../assets/colleaguesData'
+import achievementsData from '../assets/achievementsData'
 
-const Colleagues = () => {
-  const [expandedId, setExpandedId] = useState(null)
-
-  const handleExpandClick = (id) => {
-    setExpandedId(expandedId === id ? null : id)
-  }
-
+const Achievements = () => {
   return (
     <Grid container spacing={6}
         sx={{
@@ -20,13 +14,13 @@ const Colleagues = () => {
             marginTop: '16px',
         }}
     >
-      {colleaguesData
-      .sort((a,b) => a.id - b.id) // Sort colleagues by id
-      .map((colleague) => (
+      {achievementsData
+      .sort((a,b) => a.id - b.id) // Sort by id
+      .map((achievement) => (
         <Card
-          key={colleague.id}
+          key={achievement.id}
           sx={{
-            maxWidth: expandedId === colleague.id ? 600 : 345, // Adjust maxWidth based on expanded state
+            maxWidth: 600, // Adjust maxWidth based on expanded state
             width: '100%', // Ensure the card takes up the full width of its container
             transition: 'max-width 0.3s ease-in-out', // Smooth transition for expansion and contraction
             borderRadius: '16px',
@@ -35,7 +29,7 @@ const Colleagues = () => {
           <CardMedia
             sx={{ height: "auto" }}
             component="img"
-            src={colleague.image}
+            src={achievement.image}
           />
           <CardContent
             sx={{ 
@@ -49,28 +43,14 @@ const Colleagues = () => {
               variant="h5"
               component="div"
             >
-              {colleague.name}
+              {achievement.name}
             </Typography>
-            <Typography
+            <CardContent>
+              <Typography
               variant="body2"
-              sx={{ textAlign: 'justify' }}
-              dangerouslySetInnerHTML={{
-                __html: expandedId === colleague.id
-                  ? colleague.longDescription.replace(/\n/g, '<br />')
-                  : colleague.shortDescription.replace(/\n/g, '<br />')
-              }}
-            />
-            <CardContent
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-              }}
-            >
-              <MyButton onClick={() => handleExpandClick(colleague.id)}>
-                {expandedId === colleague.id ? 'Kevesebb' : 'Több'}
-              </MyButton>
+              >
+                {achievement.description}
+            </Typography>
             </CardContent>
           </CardContent>
         </Card>
@@ -79,4 +59,4 @@ const Colleagues = () => {
   )
 }
 
-export default Colleagues
+export default Achievements

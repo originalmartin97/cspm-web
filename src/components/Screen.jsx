@@ -11,6 +11,7 @@ import Colleagues from './Colleagues'
 import MyFab from './MyFab'
 import Services from './Services'
 import ActualityCardCarousel from './ActualityCardCarousel'
+import Achievements from './Achievements'
 
 const Screen = () => {
   return (
@@ -28,14 +29,6 @@ const Screen = () => {
         }}
       >
         <MyPaper>
-          <MyTypography>
-            <h6>
-              Kollégáimmal együtt feladatunk, hogy segítséget nyújtsunk 
-              minden érdeklődőnek és ügyfelünknek az anyagi stabilitásuk 
-              és 
-              jövőbeni céljaik biztonságos megvalósításához.
-            </h6>
-          </MyTypography>
           <Section id="actualities">
             <MyTypography>
               Aktuális
@@ -55,11 +48,11 @@ const Screen = () => {
             <Colleagues />
           </Section>
           
-          <Section id="munkatarsak">
+          <Section id="eredmenyek">
             <MyTypography>
-              Munkatársaink
+              Eredményeink
             </MyTypography>
-            <Colleagues />
+            <Achievements />
           </Section>
 
           <Section id="kapcsolat">

@@ -32,11 +32,9 @@ const Appbar = () => {
   }, [])
 
   const navItems = [
-    { id: 'actualities', label: 'Aktuális' },
-    { id: 'szolgaltatasok', label: 'Szolgáltatásaink' },
-    { id: 'munkatarsak', label: 'Munkatársaink' },
-    { id: 'kapcsolat', label: 'Kapcsolat' },
-    { id: 'eredmenyek', label: 'Eredményeink'},
+    { id: 'szolgaltatasok', label: 'Szolgáltatások' },
+    { id: 'munkatarsak', label: 'Munkatársak' },
+    { id: 'eredmenyek', label: 'Eredmények'},
   ]
 
   return (
@@ -44,8 +42,7 @@ const Appbar = () => {
       <AppBar
         position="fixed"
         sx={{
-          borderBottomLeftRadius: '16px',
-          borderBottomRightRadius: '16px',
+
           overflow: 'hidden', // Ensure the corners are properly clipped
           backgroundColor: 'rgb(40, 68, 115)',
           boxShadow: elevated ? '0 4px 12px rgba(0, 0, 0, 0.1)' : 'none', // Add shadow when elevated
@@ -99,6 +96,19 @@ const Appbar = () => {
               Karrier
             </Typography>
           </Button>
+          <Button
+            id='kapcsolat'
+            color='inherit'
+            sx={{
+              backgroundColor: 'rgb(195, 224, 228, 0.7)',
+              borderRadius: '12px',
+            }}
+            onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSfIH3fuCWL_t84PaJnbd46fBHYhapDi5AHp24fczjalitjGSA/viewform?usp=sf_link', '_blank')}
+          >
+            <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
+              Kapcsolat
+            </Typography>
+          </Button>
         </Toolbar>
         <IconButton
           color='inherit'
@@ -135,11 +145,11 @@ const Appbar = () => {
           <ListItem button key='karrier' onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdha8G4dTciwQmoiwAsoV2TD720PXWUKZZMg9f2Jr9VEHLcyg/viewform?usp=sf_link', '_blank')}>
             <ListItemText primary='Karrier' />
           </ListItem>
+          <ListItem button key='kapcsolat' onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSfIH3fuCWL_t84PaJnbd46fBHYhapDi5AHp24fczjalitjGSA/viewform?usp=sf_link', '_blank')}>
+            <ListItemText primary='Kapcsolat' />
+          </ListItem>
         </List>
       </Drawer>
-      {/*
-      <Career open={careerOpen} onClose={handleClose} />
-      */}
     </>
   )
 }

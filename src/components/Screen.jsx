@@ -2,11 +2,9 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Container } from '@mui/material'
 import Appbar from './Appbar'
-import MyPaper from './MyPaper'
 import Section from './Section'
 import MyTypography from './MyTypography'
 import BottomBar from './BottomBar'
-import ContactForm from './ContactForm'
 import Colleagues from './Colleagues'
 import MyFab from './MyFab'
 import Services from './Services'
@@ -20,6 +18,7 @@ const Screen = () => {
         <link rel="canonical" href="https://csaladodpenzugyimentora.hu/" />
       </Helmet>
       <Appbar />
+      <ActualitiesCardCarousel />
       <Container
         sx={{
           flexDirection: 'column',
@@ -28,37 +27,29 @@ const Screen = () => {
           marginBottom: '6px',
         }}
       >
-        <MyPaper>
-          <Section id="actualities">
-            <MyTypography>
-              Aktuális
-            </MyTypography>
-            <ActualitiesCardCarousel />
-          </Section>
-          <Section id="szolgaltatasok">
-            <MyTypography>
-              Szolgáltatásaink
-            </MyTypography>
-            <Services />
-          </Section>
-          <Section id="munkatarsak">
-            <MyTypography>
-              Munkatársaink
-            </MyTypography>
-            <Colleagues />
-          </Section>
-          
-          <Section id="eredmenyek">
-            <MyTypography>
-              Eredményeink
-            </MyTypography>
-            <Achievements />
-          </Section>
-
-          <Section id="kapcsolat">
-            <ContactForm label="Kapcsolat" />
-          </Section>
-        </MyPaper>
+        <Section id="szolgaltatasok"
+        sx={{
+          marginTop: 0,
+        }}
+      >
+        <MyTypography>
+          Szolgáltatások
+        </MyTypography>
+        <Services />
+      </Section>
+        <Section id="munkatarsak">
+          <MyTypography>
+            Munkatársak
+          </MyTypography>
+          <Colleagues />
+        </Section>
+        
+        <Section id="eredmenyek">
+          <MyTypography>
+            Eredmények
+          </MyTypography>
+          <Achievements />
+        </Section>
       </Container>
       <MyFab />
       <BottomBar />

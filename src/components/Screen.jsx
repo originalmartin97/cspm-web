@@ -23,7 +23,7 @@ const Screen = () => {
         sx={{
           flexDirection: 'column',
           alignItems: 'center',
-          marginTop: '76px',
+          marginTop: '16px',
           marginBottom: '6px',
         }}
       >

@@ -44,7 +44,7 @@ const Appbar = () => {
         sx={{
 
           overflow: 'hidden', // Ensure the corners are properly clipped
-          backgroundColor: 'rgb(40, 68, 115)',
+          background: 'linear-gradient(to bottom, rgba(40, 68, 115, 1) 0%, rgba(40, 68, 115, 0.95) 50%, rgba(40, 68, 115, 0.85) 100%)',
           boxShadow: elevated ? '0 4px 12px rgba(0, 0, 0, 0.1)' : 'none', // Add shadow when elevated
           transition: 'box-shadow 0.3s ease-in-out', // Smooth transition for shadow
           display: 'flex',

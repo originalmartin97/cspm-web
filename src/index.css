@@ -15,7 +15,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgb(241, 241, 241); /* Semi-transparent black background */
+  background-color: rgb(245, 245, 245); /* Semi-transparent black background */
   opacity: 1; /* Set the opacity to 100% */
   z-index: -1; /* Ensure the pseudo-element is behind the content */
 }

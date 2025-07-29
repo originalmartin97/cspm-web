@@ -16,7 +16,7 @@ const Section = ({ children, id, sx }) => {
           maxWidth: '100%',
           width: '100%',
           boxSizing: 'border-box',
-          backgroundColor: 'rgb(195, 224, 228, 0.7)',
+          backgroundColor: 'rgba(166, 203, 232, 0.5)',
           ...sx,
         }}
       >

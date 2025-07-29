@@ -359,7 +359,7 @@ const ActualityCardCarousel = () => {
                     justifyContent: 'center',
                     height: { xs: '40%', md: '100%' },
                     width: { xs: '100%', md: '40%' },
-                    bgcolor: 'rgba(254, 247, 255, 0.9)',
+                    bgcolor: 'rgba(166, 203, 232, 0.5)',
                     padding: { xs: 2, md: 3 },
                   }}
                 >

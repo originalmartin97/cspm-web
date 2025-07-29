@@ -44,7 +44,7 @@ const Appbar = () => {
         sx={{
 
           overflow: 'hidden', // Ensure the corners are properly clipped
-          background: 'linear-gradient(to bottom, rgba(40, 68, 115, 1) 0%, rgba(40, 68, 115, 0.95) 50%, rgba(40, 68, 115, 0.85) 100%)',
+          background: 'linear-gradient(to bottom, rgba(40, 68, 115, 1) 50%, rgba(40, 68, 115, 0.95) 75%, rgba(40, 68, 115, 0.85) 100%)',
           boxShadow: elevated ? '0 4px 12px rgba(0, 0, 0, 0.1)' : 'none', // Add shadow when elevated
           transition: 'box-shadow 0.3s ease-in-out', // Smooth transition for shadow
           display: 'flex',
@@ -58,7 +58,7 @@ const Appbar = () => {
             variant='h6'
               sx={{
                 fontWeight: 'bold',
-                color: 'rgb(254, 247, 255)',
+                color: 'rgba(245, 245, 245, 1)',
               }}
             >
               CsPM
@@ -87,12 +87,12 @@ const Appbar = () => {
             id='karrier'
             color='inherit'
             sx={{
-              backgroundColor: 'rgb(195, 224, 228, 0.7)',
+              backgroundColor: 'rgba(166, 203, 232, 0.5)',
               borderRadius: '12px',
             }}
             onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSdha8G4dTciwQmoiwAsoV2TD720PXWUKZZMg9f2Jr9VEHLcyg/viewform?usp=sf_link', '_blank')}
           >
-            <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
+            <Typography variant='h7' color='rgba(245, 245, 245, 1)' fontWeight='bold'>
               Karrier
             </Typography>
           </Button>
@@ -100,12 +100,12 @@ const Appbar = () => {
             id='kapcsolat'
             color='inherit'
             sx={{
-              backgroundColor: 'rgb(195, 224, 228, 0.7)',
+              backgroundColor: 'rgba(166, 203, 232, 0.5)',
               borderRadius: '12px',
             }}
             onClick={() => window.open('https://docs.google.com/forms/d/e/1FAIpQLSfIH3fuCWL_t84PaJnbd46fBHYhapDi5AHp24fczjalitjGSA/viewform?usp=sf_link', '_blank')}
           >
-            <Typography variant='h7' color='rgb(254, 247, 255)' fontWeight='bold'>
+            <Typography variant='h7' color='rgba(245, 245, 245, 1)' fontWeight='bold'>
               Kapcsolat
             </Typography>
           </Button>
@@ -133,7 +133,7 @@ const Appbar = () => {
         >
         <List
           sx={{
-            backgroundColor: 'rgb(254, 247, 255)',
+            backgroundColor: 'rgba(245, 245, 245, 1)',
             height: '100%',
           }}
         >

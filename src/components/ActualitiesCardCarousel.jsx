@@ -279,8 +279,7 @@ const ActualityCardCarousel = () => {
         position: 'relative',
         width: '100%',
         overflow: 'hidden',
-        borderRadius: '16px',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+        marginTop: '72px',
       }}
       role="region"
       aria-label="Actuality carousel"
@@ -299,7 +298,6 @@ const ActualityCardCarousel = () => {
             : `translateY(-${currentIndex * 100}%)`, // Vertical translation for desktop
           display: 'flex',
           flexDirection: isMobile ? 'row' : 'column',
-          width: '100%',
         }}
       >
         {actualitiesData.map((actuality, index) => (
@@ -322,6 +320,7 @@ const ActualityCardCarousel = () => {
                 flexDirection: { xs: 'column', md: 'row' },
                 cursor: 'pointer',
                 transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                borderRadius: 0,
                 '&:hover': {
                   transform: 'scale(1.01)',
                   boxShadow: '0 6px 16px rgba(0, 0, 0, 0.15)',
@@ -551,7 +550,7 @@ const ActualityCardCarousel = () => {
             maxHeight: '90vh',
             p: 4,
             outline: 'none',
-            borderRadius: '8px',
+            
             boxShadow: 24,
             position: 'relative',
             overflow: 'auto',
@@ -711,7 +710,7 @@ const ActualityCardCarousel = () => {
                     maxHeight: '300px',
                     width: '100%',
                     objectFit: 'contain',
-                    borderRadius: '4px',
+                    
                   }}
                 />
               </Box>

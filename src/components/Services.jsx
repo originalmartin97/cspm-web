@@ -18,23 +18,27 @@ const Services = () => {
     setModalOpen(false)
     setSelectedService(null)
   }
+
   return (
     <>
       {servicesData.map((service, index) => (
         <Card key={index}
           onClick={() => handleCardClick(service)}
           sx={{
-            boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-            borderRadius: '10px',
-            my: '8px',
+            boxShadow: '0px 4px 8px rgba(40, 68, 115, 0.12)',
+            borderRadius: '16px', // Consistent with other components
+            my: '12px', // Increased spacing
             cursor: 'pointer',
             position: 'relative',
-            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            border: '1px solid rgba(40, 68, 115, 0.08)',
             '&:hover': {
-              transform: 'translateY(-2px)',
-              boxShadow: '0 6px 12px rgba(0, 0, 0, 0.15)',
+              transform: 'translateY(-4px)',
+              boxShadow: '0 8px 20px rgba(40, 68, 115, 0.18)',
+              borderColor: 'rgba(40, 68, 115, 0.15)',
               '& .hover-indicator': {
                 opacity: 1,
+                transform: 'scale(1.1)',
               },
             },
           }}
@@ -55,19 +59,19 @@ const Services = () => {
               top: 16,
               right: 16,
               opacity: 0,
-              transition: 'opacity 0.3s ease',
+              transition: 'all 0.3s ease',
               zIndex: 1,
-              backgroundColor: 'rgba(40, 68, 115, 0.9)', // Using brand color
+              backgroundColor: 'rgba(40, 68, 115, 0.9)',
               borderRadius: '50%',
-              width: 36,
-              height: 36,
+              width: 40, // Consistent with Colleagues
+              height: 40,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              boxShadow: '0 2px 8px rgba(40, 68, 115, 0.3)', // Using brand color for shadow
+              boxShadow: '0 4px 12px rgba(40, 68, 115, 0.25)',
             }}
           >
-            <InfoOutlinedIcon sx={{ color: 'rgb(254, 247, 255)', fontSize: 18 }} />
+            <InfoOutlinedIcon sx={{ color: 'rgb(254, 247, 255)', fontSize: 20 }} />
           </Box>
           <CardContent>
             <MyTypography
@@ -97,17 +101,21 @@ const Services = () => {
       >
         <Paper
           sx={{
-            width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' },
+            width: { xs: '90%', sm: '80%', md: '70%' },
             maxHeight: '90vh',
-            p: 4,
+            p: { xs: 3, sm: 4, md: 5 }, // Responsive padding
             outline: 'none',
-            boxShadow: 24,
+            borderRadius: '20px', // Consistent with Colleagues
+            boxShadow: '0 20px 60px rgba(40, 68, 115, 0.25)', // Enhanced shadow
             position: 'relative',
             overflow: 'auto',
-            animation: 'modalFadeIn 0.3s ease-out',
+            backgroundColor: 'rgba(255, 255, 255, 0.98)', // Slightly transparent
+            backdropFilter: 'blur(20px)', // Add backdrop filter
+            border: '1px solid rgba(255, 255, 255, 0.2)', // Add border
+            animation: 'modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)', // Consistent timing
             '@keyframes modalFadeIn': {
-              '0%': { opacity: 0, transform: 'scale(0.9)' },
-              '100%': { opacity: 1, transform: 'scale(1)' }
+              '0%': { opacity: 0, transform: 'scale(0.85) translateY(20px)' },
+              '100%': { opacity: 1, transform: 'scale(1) translateY(0)' }
             },
           }}
           role="dialog"

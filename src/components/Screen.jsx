@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Container, Grid, Box } from '@mui/material'
+import { Container, Grid } from '@mui/material'
 import Appbar from './Appbar'
 import Section from './Section'
 import MyTypography from './MyTypography'
@@ -19,8 +19,8 @@ const Screen = () => {
       </Helmet>
       <Appbar />
       <ActualitiesCardCarousel />
-      <Container maxWidth="xl" sx={{ py: 3 }}>
-        <Grid container spacing={{ xs: 3, md: 4 }} sx={{ mt: 0 }}>
+      <Container maxWidth="xl" sx={{ py: { xs: 4, sm: 5, md: 6 } }}>
+        <Grid container spacing={{ xs: 4, md: 5 }} sx={{ mt: 0 }}>
           {/* Services Section */}
           <Grid item xs={12} md={6} lg={6}>
             <Section id="szolgaltatasok" sx={{ height: '100%' }}>

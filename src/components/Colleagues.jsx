@@ -146,15 +146,19 @@ const Colleagues = () => {
           sx={{
             width: { xs: '90%', sm: '80%', md: '70%', lg: '60%' },
             maxHeight: '90vh',
-            p: 4,
+            p: { xs: 3, sm: 4, md: 5 }, // Responsive padding
             outline: 'none',
-            boxShadow: 24,
+            borderRadius: '20px', // Increased from default
+            boxShadow: '0 20px 60px rgba(40, 68, 115, 0.25)', // Enhanced shadow
             position: 'relative',
             overflow: 'auto',
-            animation: 'modalFadeIn 0.3s ease-out',
+            backgroundColor: 'rgba(255, 255, 255, 0.98)', // Slightly transparent
+            backdropFilter: 'blur(20px)', // Add backdrop filter
+            border: '1px solid rgba(255, 255, 255, 0.2)', // Add border
+            animation: 'modalFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1)', // Improved timing
             '@keyframes modalFadeIn': {
-              '0%': { opacity: 0, transform: 'scale(0.9)' },
-              '100%': { opacity: 1, transform: 'scale(1)' }
+              '0%': { opacity: 0, transform: 'scale(0.85) translateY(20px)' }, // More natural entrance
+              '100%': { opacity: 1, transform: 'scale(1) translateY(0)' }
             },
           }}
           role="dialog"

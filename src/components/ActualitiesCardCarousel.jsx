@@ -1,20 +1,15 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { 
   Box, 
-  Card, 
-  CardContent, 
   CardMedia, 
   Typography, 
   IconButton,
   Modal,
   Paper,
-  CardActionArea,
   CircularProgress,
   useTheme,
   useMediaQuery,
 } from '@mui/material';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CloseIcon from '@mui/icons-material/Close';
@@ -33,12 +28,19 @@ const ActualityCardCarousel = () => {
   const carouselRef = useRef(null);
   const modalContentRef = useRef(null);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // Memoize the handler functions
   const handleNextCardCallback = useCallback((e, autoScroll = false) => {
-    handleNextCard(e, autoScroll);
-  }, []);
+    if (e) e.stopPropagation();
+    if (isTransitioning && !autoScroll) return;
+    
+    setIsTransitioning(true);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % actualitiesData.length);
+    
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 1000);
+  }, [isTransitioning]);
 
   const handleModalNavigationCallback = useCallback((direction) => {
     const navigateModal = async (direction) => {
@@ -78,6 +80,20 @@ const ActualityCardCarousel = () => {
     
     navigateModal(direction);
   }, [selectedActuality]);
+
+  const handlePrevCardCallback = useCallback((e, autoScroll = false) => {
+    if (e) e.stopPropagation();
+    if (isTransitioning && !autoScroll) return;
+    
+    setIsTransitioning(true);
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? actualitiesData.length - 1 : prevIndex - 1
+    );
+    
+    setTimeout(() => {
+      setIsTransitioning(false);
+    }, 1000);
+  }, [isTransitioning]);
 
   const handleKeyDownCallback = useCallback((e) => {
     handleKeyDown(e);

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { Container } from '@mui/material'
+import { Container, Grid, Box } from '@mui/material'
 import Appbar from './Appbar'
 import Section from './Section'
 import MyTypography from './MyTypography'
@@ -19,37 +19,32 @@ const Screen = () => {
       </Helmet>
       <Appbar />
       <ActualitiesCardCarousel />
-      <Container
-        sx={{
-          flexDirection: 'column',
-          alignItems: 'center',
-          marginTop: '16px',
-          marginBottom: '6px',
-        }}
-      >
-        <Section id="szolgaltatasok"
-        sx={{
-          marginTop: 0,
-        }}
-      >
-        <MyTypography>
-          Szolgáltatások
-        </MyTypography>
-        <Services />
-      </Section>
-        <Section id="munkatarsak">
-          <MyTypography>
-            Munkatársak
-          </MyTypography>
-          <Colleagues />
-        </Section>
-        
-        <Section id="eredmenyek">
-          <MyTypography>
-            Eredmények
-          </MyTypography>
-          <Achievements />
-        </Section>
+      <Container maxWidth="xl" sx={{ py: 3 }}>
+        <Grid container spacing={{ xs: 3, md: 4 }} sx={{ mt: 0 }}>
+          {/* Services Section */}
+          <Grid item xs={12} md={6} lg={6}>
+            <Section id="szolgaltatasok" sx={{ height: '100%' }}>
+              <MyTypography>Szolgáltatások</MyTypography>
+              <Services />
+            </Section>
+          </Grid>
+          
+          {/* Achievements Section */}
+          <Grid item xs={12} md={6} lg={6}>
+            <Section id="eredmenyek" sx={{ height: '100%' }}>
+              <MyTypography>Eredmények</MyTypography>
+              <Achievements />
+            </Section>
+          </Grid>
+          
+          {/* Colleagues Section - Always full width */}
+          <Grid item xs={12}>
+            <Section id="munkatarsak">
+              <MyTypography>Munkatársak</MyTypography>
+              <Colleagues />
+            </Section>
+          </Grid>
+        </Grid>
       </Container>
       <MyFab />
       <BottomBar />

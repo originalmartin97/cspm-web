@@ -30,9 +30,6 @@ const ActualityCardCarousel = () => {
   const [markdownContent, setMarkdownContent] = useState('');
   const [loading, setLoading] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [controlsHovered, setControlsHovered] = useState(false);
-  const [showLeftButton, setShowLeftButton] = useState(false);
-  const [showRightButton, setShowRightButton] = useState(false);
   const carouselRef = useRef(null);
   const modalContentRef = useRef(null);
   const theme = useTheme();
@@ -89,7 +86,7 @@ const ActualityCardCarousel = () => {
   // Auto-scroll effect
   useEffect(() => {
     let interval;
-    if (!isHovering && !modalOpen && !isTransitioning && !controlsHovered) {
+    if (!isHovering && !modalOpen && !isTransitioning) {
       interval = setInterval(() => {
         handleNextCardCallback(null, true);
       }, 5000);
@@ -98,7 +95,7 @@ const ActualityCardCarousel = () => {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isHovering, modalOpen, isTransitioning, controlsHovered, handleNextCardCallback]);
+  }, [isHovering, modalOpen, isTransitioning, handleNextCardCallback]);
 
   // Handle manual navigation with transition management
   const handlePrevCard = (e, autoScroll = false) => {
@@ -195,10 +192,6 @@ const ActualityCardCarousel = () => {
 
   // Touch swipe handlers
   const swipeHandlers = useSwipeable({
-    // Only use vertical swipes on desktop
-    onSwipedUp: () => !isMobile && handleNextCard(null),
-    onSwipedDown: () => !isMobile && handlePrevCard(null),
-    // Use horizontal swipes on all devices, but they're especially important for mobile
     onSwipedLeft: () => handleNextCard(null),
     onSwipedRight: () => handlePrevCard(null),
     preventDefaultTouchmoveEvent: true,
@@ -212,54 +205,6 @@ const ActualityCardCarousel = () => {
     preventDefaultTouchmoveEvent: true,
     trackMouse: false
   });
-
-  // Mouse move handler for modal navigation buttons - Improved implementation
-  const handleModalMouseMove = (e) => {
-    if (!modalContentRef.current || loading) return;
-
-    // Make the buttons more persistent by tracking the entire document
-    const modalRect = modalContentRef.current.getBoundingClientRect();
-    const mouseX = e.clientX;
-    
-    // Check if we're near the left or right edge of the screen
-    const windowWidth = window.innerWidth;
-    const edgeThreshold = Math.min(150, windowWidth * 0.15); // 15% of window width or 150px max
-    
-    // Show left button when near the left edge of the screen
-    setShowLeftButton(mouseX < edgeThreshold || 
-                     (mouseX > modalRect.left && mouseX < modalRect.left + modalRect.width * 0.3));
-    
-    // Show right button when near the right edge of the screen
-    setShowRightButton(mouseX > windowWidth - edgeThreshold || 
-                      (mouseX > modalRect.left + modalRect.width * 0.7 && mouseX < modalRect.right));
-  };
-
-  // Replace handleModalMouseLeave with this less aggressive version
-  const handleModalMouseLeave = (e) => {
-    // Only hide buttons if the mouse left the entire window
-    // This ensures buttons remain visible when moving mouse toward them
-    if (e.clientX <= 0 || e.clientX >= window.innerWidth || 
-        e.clientY <= 0 || e.clientY >= window.innerHeight) {
-      setShowLeftButton(false);
-      setShowRightButton(false);
-    }
-  };
-
-  // Make modal navigation buttons always visible for some time after any user interaction
-  useEffect(() => {
-    if (modalOpen) {
-      // Show buttons whenever modal is open
-      setShowLeftButton(true);
-      setShowRightButton(true);
-      
-      // Ensure document-level mouse movement tracking
-      document.addEventListener('mousemove', handleModalMouseMove);
-      
-      return () => {
-        document.removeEventListener('mousemove', handleModalMouseMove);
-      };
-    }
-  }, [modalOpen]);
 
   // Handle direct navigation to a specific slide
   const handleGoToSlide = (index) => {
@@ -278,8 +223,9 @@ const ActualityCardCarousel = () => {
       sx={{
         position: 'relative',
         width: '100%',
-        overflow: 'hidden',
         marginTop: '72px',
+        paddingY: { xs: 3, sm: 4, md: 5 },
+        paddingX: { xs: 2, sm: 3, md: 4 },
       }}
       role="region"
       aria-label="Actuality carousel"
@@ -289,244 +235,258 @@ const ActualityCardCarousel = () => {
         ref={carouselRef}
         {...swipeHandlers}
         onMouseEnter={() => setIsHovering(true)}
-        onMouseLeave={() => !controlsHovered && setIsHovering(false)}
+        onMouseLeave={() => setIsHovering(false)}
         sx={{
-          height: { xs: '200px', sm: '250px', md: '300px', lg: '400px' },
-          transition: 'transform 1s ease-in-out',
-          transform: isMobile 
-            ? `translateX(-${currentIndex * 100}%)` // Horizontal translation for mobile
-            : `translateY(-${currentIndex * 100}%)`, // Vertical translation for desktop
-          display: 'flex',
-          flexDirection: isMobile ? 'row' : 'column',
+          position: 'relative',
+          width: '100%',
+          maxWidth: '1200px',
+          margin: '0 auto',
+          aspectRatio: '16 / 9', // Consistent aspect ratio
+          borderRadius: '24px',
+          overflow: 'hidden',
+          boxShadow: '0 8px 32px rgba(40, 68, 115, 0.15)',
+          background: 'linear-gradient(135deg, rgba(166, 203, 232, 0.1) 0%, rgba(40, 68, 115, 0.05) 100%)',
         }}
       >
-        {actualitiesData.map((actuality, index) => (
-          <Box 
-            key={actuality.id}
-            sx={{
-              height: '100%',
-              width: '100%',
-              flexShrink: 0,
-            }}
-            role="group"
-            aria-roledescription="slide"
-            aria-label={`${actuality.title} - Slide ${index + 1} of ${actualitiesData.length}`}
-            aria-hidden={currentIndex !== index}
-          >
-            <Card 
-              sx={{ 
+        {/* Slides container */}
+        <Box
+          sx={{
+            height: '100%',
+            width: `${actualitiesData.length * 100}%`,
+            display: 'flex',
+            transition: 'transform 1s cubic-bezier(0.4, 0, 0.2, 1)',
+            transform: `translateX(-${(currentIndex * 100) / actualitiesData.length}%)`,
+          }}
+        >
+          {actualitiesData.map((actuality, index) => (
+            <Box
+              key={actuality.id}
+              sx={{
+                width: `${100 / actualitiesData.length}%`,
                 height: '100%',
-                display: 'flex',
-                flexDirection: { xs: 'column', md: 'row' },
+                position: 'relative',
                 cursor: 'pointer',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                borderRadius: 0,
-                '&:hover': {
-                  transform: 'scale(1.01)',
-                  boxShadow: '0 6px 16px rgba(0, 0, 0, 0.15)',
+                '&:hover .content-overlay': {
+                  opacity: 1,
+                  transform: 'translateY(0)',
+                },
+                '&:hover .image': {
+                  transform: 'scale(1.05)',
                 },
               }}
-              elevation={3}
+              onClick={() => handleCardClick(actuality)}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${actuality.title} - Slide ${index + 1} of ${actualitiesData.length}`}
+              aria-hidden={currentIndex !== index}
             >
-              <CardActionArea 
-                onClick={() => handleCardClick(actuality)}
+              {/* Background Image */}
+              <CardMedia
+                component="img"
+                image={actuality.image}
+                alt={`Image for ${actuality.title}`}
+                className="image"
                 sx={{
-                  display: 'flex',
-                  flexDirection: { xs: 'column', md: 'row' },
-                  alignItems: 'stretch',
+                  width: '100%',
                   height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                  transition: 'transform 0.6s ease',
                 }}
-                aria-label={`Read more about ${actuality.title}`}
+              />
+
+              {/* Gradient Overlay */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  background: 'linear-gradient(45deg, rgba(40, 68, 115, 0.8) 0%, rgba(40, 68, 115, 0.4) 50%, rgba(218, 165, 32, 0.3) 100%)',
+                  pointerEvents: 'none',
+                }}
+              />
+
+              {/* Content */}
+              <Box
+                className="content-overlay"
+                sx={{
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  padding: { xs: 3, sm: 4, md: 5 },
+                  color: 'white',
+                  zIndex: 2,
+                  opacity: 0.9,
+                  transform: 'translateY(20px)',
+                  transition: 'opacity 0.4s ease, transform 0.4s ease',
+                }}
               >
-                <CardMedia
-                  component="img"
-                  image={actuality.image}
-                  alt={`Image for ${actuality.title}`}
+                <Typography
+                  variant="h5"
+                  component="h3"
                   sx={{
-                    height: { xs: '60%', md: '100%' },
-                    width: { xs: '100%', md: '60%' },
-                    objectFit: 'cover',
-                    transition: 'filter 0.3s ease',
-                    '&:hover': {
-                      filter: 'brightness(1.05)',
-                    },
-                  }}
-                />
-                <CardContent 
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    height: { xs: '40%', md: '100%' },
-                    width: { xs: '100%', md: '40%' },
-                    bgcolor: 'rgba(166, 203, 232, 0.5)',
-                    padding: { xs: 2, md: 3 },
+                    fontWeight: 'bold',
+                    mb: 2,
+                    fontSize: { xs: '1.3rem', sm: '1.6rem', md: '1.9rem' },
+                    textShadow: '0 2px 8px rgba(0, 0, 0, 0.3)',
+                    lineHeight: 1.2,
                   }}
                 >
-                  <Typography 
-                    variant="h5" 
-                    component="h3"
-                    sx={{
-                      fontWeight: 'bold',
-                      mb: 1,
-                      fontSize: { xs: '1.2rem', sm: '1.5rem', md: '1.8rem' },
-                    }}
-                  >
-                    {actuality.title}
-                  </Typography>
-                  <Typography 
-                    variant="body1"
-                    sx={{
-                      display: { xs: 'none', sm: 'block' },
-                      fontSize: { sm: '0.9rem', md: '1rem' },
-                      overflow: 'hidden',
-                      textOverflow: 'ellipsis',
-                      WebkitLineClamp: 3,
-                      WebkitBoxOrient: 'vertical',
-                      WebkitBoxDisplay: '-webkit-box',
-                    }}
-                  >
-                    {actuality.summary}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-          </Box>
-        ))}
+                  {actuality.title}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    fontSize: { xs: '0.9rem', sm: '1rem', md: '1.1rem' },
+                    opacity: 0.95,
+                    textShadow: '0 1px 4px rgba(0, 0, 0, 0.3)',
+                    lineHeight: 1.5,
+                    maxWidth: '80%',
+                  }}
+                >
+                  {actuality.summary}
+                </Typography>
+              </Box>
+
+              {/* Slide number indicator */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 24,
+                  left: 24,
+                  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                  borderRadius: '12px',
+                  padding: '8px 12px',
+                  zIndex: 3,
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: 'rgba(40, 68, 115, 0.8)',
+                    fontSize: '0.8rem',
+                    fontWeight: 'medium',
+                  }}
+                >
+                  {index + 1} / {actualitiesData.length}
+                </Typography>
+              </Box>
+            </Box>
+          ))}
+        </Box>
       </Box>
 
-      {/* Navigation controls */}
+      {/* Navigation Controls */}
       <Box
         sx={{
-          position: 'absolute',
-          right: '20px',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          display: {
-            xs: 'none',
-            sm: isHovering || controlsHovered ? 'flex' : 'none',
-          },
-          flexDirection: 'column',
-          gap: '10px',
-          opacity: isHovering || controlsHovered ? 1 : 0,
-          transition: 'opacity 0.3s ease-in-out',
-          zIndex: 2,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          mt: 4,
+          gap: 2,
         }}
-        onMouseEnter={() => setControlsHovered(true)}
-        onMouseLeave={() => setControlsHovered(false)}
       >
+        {/* Previous Button */}
         <IconButton
-          onClick={(e) => {
-            e.stopPropagation();
-            handlePrevCard(e);
-          }}
-          size="large"
+          onClick={(e) => handlePrevCard(e)}
+          disabled={isTransitioning}
           sx={{
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
-            color: 'white',
-            boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.45)',
+            backgroundColor: 'rgba(40, 68, 115, 0.1)',
+            color: 'rgba(40, 68, 115, 0.8)',
+            border: '2px solid rgba(40, 68, 115, 0.2)',
+            width: 48,
+            height: 48,
             '&:hover': {
-              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              backgroundColor: 'rgba(40, 68, 115, 0.15)',
+              color: 'rgba(40, 68, 115, 1)',
+              border: '2px solid rgba(40, 68, 115, 0.4)',
+              transform: 'scale(1.05)',
             },
+            '&:disabled': {
+              opacity: 0.5,
+            },
+            transition: 'all 0.2s ease',
           }}
           aria-label="Previous slide"
         >
-          <KeyboardArrowUpIcon fontSize="inherit" />
+          <KeyboardArrowLeftIcon />
         </IconButton>
 
-        <IconButton
-          onClick={(e) => {
-            e.stopPropagation();
-            handleNextCard(e);
-          }}
-          size="large"
+        {/* Pagination Dots */}
+        <Box
           sx={{
-            backgroundColor: 'rgba(0, 0, 0, 0.4)',
-            color: 'white',
-            boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.45)',
+            display: 'flex',
+            gap: 1.5,
+            alignItems: 'center',
+            backgroundColor: 'rgba(40, 68, 115, 0.05)',
+            borderRadius: '24px',
+            padding: '12px 20px',
+            border: '1px solid rgba(40, 68, 115, 0.1)',
+          }}
+          role="tablist"
+          aria-label="Carousel pagination"
+        >
+          {actualitiesData.map((_, index) => (
+            <Box
+              key={index}
+              onClick={() => handleGoToSlide(index)}
+              role="tab"
+              aria-selected={currentIndex === index}
+              aria-label={`Go to slide ${index + 1}`}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleGoToSlide(index);
+                }
+              }}
+              sx={{
+                width: currentIndex === index ? 24 : 12,
+                height: 12,
+                borderRadius: '6px',
+                backgroundColor: currentIndex === index 
+                  ? 'rgba(40, 68, 115, 0.8)' 
+                  : 'rgba(40, 68, 115, 0.3)',
+                cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  backgroundColor: currentIndex === index 
+                    ? 'rgba(40, 68, 115, 1)' 
+                    : 'rgba(40, 68, 115, 0.6)',
+                  transform: 'scale(1.1)',
+                },
+              }}
+            />
+          ))}
+        </Box>
+
+        {/* Next Button */}
+        <IconButton
+          onClick={(e) => handleNextCard(e)}
+          disabled={isTransitioning}
+          sx={{
+            backgroundColor: 'rgba(40, 68, 115, 0.1)',
+            color: 'rgba(40, 68, 115, 0.8)',
+            border: '2px solid rgba(40, 68, 115, 0.2)',
+            width: 48,
+            height: 48,
             '&:hover': {
-              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+              backgroundColor: 'rgba(40, 68, 115, 0.15)',
+              color: 'rgba(40, 68, 115, 1)',
+              border: '2px solid rgba(40, 68, 115, 0.4)',
+              transform: 'scale(1.05)',
             },
+            '&:disabled': {
+              opacity: 0.5,
+            },
+            transition: 'all 0.2s ease',
           }}
           aria-label="Next slide"
         >
-          <KeyboardArrowDownIcon fontSize="inherit" />
+          <KeyboardArrowRightIcon />
         </IconButton>
       </Box>
-
-      {/* Pagination indicators */}
-      <Box
-        sx={{
-          position: 'absolute',
-          left: '50%',
-          bottom: '10px',
-          transform: 'translateX(-50%)',
-          display: 'flex',
-          gap: '8px',
-          zIndex: 2,
-        }}
-        role="tablist"
-        aria-label="Carousel pagination"
-      >
-        {actualitiesData.map((_, index) => (
-          <Box
-            key={index}
-            onClick={() => handleGoToSlide(index)}
-            role="tab"
-            aria-selected={currentIndex === index}
-            aria-label={`Go to slide ${index + 1}`}
-            tabIndex={0}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                handleGoToSlide(index);
-              }
-            }}
-            sx={{
-              width: '10px',
-              height: '10px',
-              borderRadius: '50%',
-              backgroundColor: currentIndex === index 
-                ? 'rgba(0, 0, 0, 0.8)' 
-                : 'rgba(255, 255, 255, 0.5)',
-              border: '1px solid rgba(0, 0, 0, 0.3)',
-              cursor: 'pointer',
-              transition: 'transform 0.2s ease, background-color 0.3s ease',
-              '&:hover': {
-                transform: 'scale(1.2)',
-                backgroundColor: currentIndex === index 
-                  ? 'rgba(0, 0, 0, 0.8)' 
-                  : 'rgba(255, 255, 255, 0.8)',
-              },
-            }}
-          />
-        ))}
-      </Box>
-
-      {/* Mobile swipe hint - only shows briefly when component mounts */}
-      {isMobile && (
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            backgroundColor: 'rgba(0, 0, 0, 0.5)',
-            color: 'white',
-            padding: '8px 16px',
-            borderRadius: '20px',
-            fontSize: '0.9rem',
-            pointerEvents: 'none',
-            animation: 'fadeOut 3s forwards',
-            '@keyframes fadeOut': {
-              '0%': { opacity: 1 },
-              '70%': { opacity: 1 },
-              '100%': { opacity: 0 }
-            },
-          }}
-        >
-          Swipe left/right to navigate
-        </Box>
-      )}
 
       {/* Modal for displaying full actuality content */}
       <Modal
@@ -543,8 +503,6 @@ const ActualityCardCarousel = () => {
         <Paper
           ref={modalContentRef}
           {...modalSwipeHandlers}
-          // Remove onMouseMove since we're using document-level tracking
-          onMouseLeave={(e) => handleModalMouseLeave(e)}
           sx={{
             width: { xs: '90%', sm: '80%', md: '70%' },
             maxHeight: '90vh',
@@ -576,111 +534,65 @@ const ActualityCardCarousel = () => {
             <CloseIcon />
           </IconButton>
           
-          {/* Previous button - positioned on left side with improved visibility */}
+          {/* Previous button */}
           <IconButton
             aria-label="Previous actuality"
             onClick={() => handleModalNavigation('prev')}
             disabled={loading}
             sx={{
-              position: 'fixed', // Changed to fixed positioning
-              left: { xs: 8, sm: 16 },
+              position: 'absolute',
+              left: 16,
               top: '50%',
               transform: 'translateY(-50%)',
-              backgroundColor: 'rgba(0,0,0,0.5)', // Darker for better visibility
-              color: 'white',
-              padding: { xs: '8px', sm: '12px' }, // Larger clickable area
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              color: 'rgba(40, 68, 115, 0.8)',
+              width: 48,
+              height: 48,
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
               '&:hover': {
-                backgroundColor: 'rgba(0,0,0,0.7)',
+                backgroundColor: 'rgba(255, 255, 255, 1)',
+                color: 'rgba(40, 68, 115, 1)',
+                transform: 'translateY(-50%) scale(1.1)',
               },
-              transition: 'opacity 0.3s ease, background-color 0.2s ease',
-              opacity: isMobile || showLeftButton ? 0.9 : 0.3, // Always somewhat visible
-              visibility: 'visible', // Always visible
-              zIndex: 1500, // Higher z-index to ensure it's above other content
+              '&:disabled': {
+                opacity: 0.5,
+              },
+              transition: 'all 0.2s ease',
+              zIndex: 1500,
             }}
           >
-            <KeyboardArrowLeftIcon fontSize={isMobile ? "small" : "medium"} />
+            <KeyboardArrowLeftIcon />
           </IconButton>
           
-          {/* Next button - positioned on right side with improved visibility */}
+          {/* Next button */}
           <IconButton
             aria-label="Next actuality"
             onClick={() => handleModalNavigation('next')}
             disabled={loading}
             sx={{
-              position: 'fixed', // Changed to fixed positioning
-              right: { xs: 8, sm: 16 },
+              position: 'absolute',
+              right: 16,
               top: '50%',
               transform: 'translateY(-50%)',
-              backgroundColor: 'rgba(0,0,0,0.5)', // Darker for better visibility
-              color: 'white',
-              padding: { xs: '8px', sm: '12px' }, // Larger clickable area
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              color: 'rgba(40, 68, 115, 0.8)',
+              width: 48,
+              height: 48,
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
               '&:hover': {
-                backgroundColor: 'rgba(0,0,0,0.7)',
+                backgroundColor: 'rgba(255, 255, 255, 1)',
+                color: 'rgba(40, 68, 115, 1)',
+                transform: 'translateY(-50%) scale(1.1)',
               },
-              transition: 'opacity 0.3s ease, background-color 0.2s ease',
-              opacity: isMobile || showRightButton ? 0.9 : 0.3, // Always somewhat visible
-              visibility: 'visible', // Always visible
-              zIndex: 1500, // Higher z-index to ensure it's above other content
+              '&:disabled': {
+                opacity: 0.5,
+              },
+              transition: 'all 0.2s ease',
+              zIndex: 1500,
             }}
           >
-            <KeyboardArrowRightIcon fontSize={isMobile ? "small" : "medium"} />
+            <KeyboardArrowRightIcon />
           </IconButton>
-          
-          {/* Mobile swipe hint - only shows briefly when modal opens on mobile */}
-          {isMobile && modalOpen && (
-            <Box
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                color: 'white',
-                padding: '8px 16px',
-                borderRadius: '20px',
-                fontSize: '0.9rem',
-                pointerEvents: 'none',
-                animation: 'fadeOut 2s forwards',
-                animationDelay: '1s',
-                zIndex: 10,
-                '@keyframes fadeOut': {
-                  '0%': { opacity: 1 },
-                  '100%': { opacity: 0 }
-                },
-              }}
-            >
-              Swipe left/right to navigate
-            </Box>
-          )}
-
-          {/* Desktop navigation hint - only shows briefly when modal opens on desktop */}
-          {!isMobile && modalOpen && (
-            <Box
-              sx={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                display: 'flex',
-                gap: 2,
-                backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                color: 'white',
-                padding: '8px 16px',
-                borderRadius: '20px',
-                fontSize: '0.9rem',
-                pointerEvents: 'none',
-                animation: 'fadeOut 2s forwards',
-                animationDelay: '1s',
-                zIndex: 10,
-                '@keyframes fadeOut': {
-                  '0%': { opacity: 1 },
-                  '100%': { opacity: 0 }
-                },
-              }}
-            >
-              <KeyboardArrowLeftIcon /> Navigate with mouse or arrow keys <KeyboardArrowRightIcon />
-            </Box>
-          )}
           
           {loading ? (
             <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
@@ -798,50 +710,6 @@ const ActualityCardCarousel = () => {
         </Paper>
       </Modal>
 
-      {/* Persistent navigation buttons for mobile */}
-      {isMobile && !modalOpen && ( // Only show when modal is closed
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: 16,
-            left: 0,
-            right: 0,
-            display: 'flex',
-            justifyContent: 'space-between',
-            px: 2,
-            zIndex: 15,
-          }}
-        >
-          <IconButton
-            aria-label="Previous actuality (mobile)"
-            onClick={(e) => handlePrevCard(e)} // Fixed: use handlePrevCard instead
-            disabled={isTransitioning}
-            sx={{
-              backgroundColor: 'rgba(0,0,0,0.4)',
-              color: 'white',
-              '&:hover': {
-                backgroundColor: 'rgba(0,0,0,0.6)',
-              },
-            }}
-          >
-            <KeyboardArrowLeftIcon />
-          </IconButton>
-          <IconButton
-            aria-label="Next actuality (mobile)"
-            onClick={(e) => handleNextCard(e)} // Fixed: use handleNextCard instead
-            disabled={isTransitioning}
-            sx={{
-              backgroundColor: 'rgba(0,0,0,0.4)',
-              color: 'white',
-              '&:hover': {
-                backgroundColor: 'rgba(0,0,0,0.6)',
-              },
-            }}
-          >
-            <KeyboardArrowRightIcon />
-          </IconButton>
-        </Box>
-      )}
     </Box>
   );
 };

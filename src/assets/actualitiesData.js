@@ -5,6 +5,7 @@ import penzugyKarrierLehetosegContent from './actualities/penzugy_karrier_hirdet
 import elderlyAd06Content from './actualities/elderly_ad_06.md';
 import udvContent from './actualities/udv.md';
 import jcc from './actualities/jcc.md';
+import sulikezdes from './actualities/sulikezdes.md';
 
 // Define your actuality data
 const actualitesData = [
@@ -50,10 +51,16 @@ const actualitesData = [
     image: require('./adbar/ad_nyar_03.png'),
     contentPath: jcc,
     summary: 'A Gondoskodásod Sosem Megy Szabadságra! 👨‍👩‍👧‍👦☀️'
-
   },
-      {
+  {
     id: 7,
+    title: 'Szeptember, Iskola, Biztosítás',
+    image: require('./adbar/ad_sulikezdes.gif'),
+    contentPath: sulikezdes,
+    summary: 'A Tanulás Ne Álljon Meg!🏫📚Mi történik, ha gyermeked egy baleset miatt kimarad az iskolából?'
+  },
+  {
+    id: 8,
     title: 'Üdvözlöm a CsPM honlapján!',
     image: require('./adbar/udv.png'),
     contentPath: udvContent,

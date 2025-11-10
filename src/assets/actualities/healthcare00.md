@@ -19,7 +19,7 @@ A **MetLife Baleseti Sérülésekre Szóló Kiegészítője** a forradalmi megol
     * az egynapos sebészeti beavatkozásokat, és
     * a képalkotó diagnosztikai vizsgálatokat **magánellátásban**.
 
-**Ne kockáztass! Válassza a maximális védelmet, és élj gondtalanul!**
+**Ne kockáztass! Válaszd a maximális védelmet, és élj gondtalanul!**
 
 Keress bizalommal a részletekért, hogy megtaláld a számodra legjobb megoldást!
 

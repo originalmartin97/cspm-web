@@ -1,0 +1,35 @@
+{
+  "files": {
+    "main.css": "/static/css/main.56fccec9.css",
+    "main.js": "/static/js/main.5821c797.js",
+    "static/js/453.5d8bf5df.chunk.js": "/static/js/453.5d8bf5df.chunk.js",
+    "static/media/vDavid.jpeg": "/static/media/vDavid.b6ebea2e06ffbd2acfba.jpeg",
+    "static/media/elsoEvEredmeny.png": "/static/media/elsoEvEredmeny.1771088676c5d7936895.png",
+    "static/media/szfErzsebet.jpg": "/static/media/szfErzsebet.c33fe76ed5ad2209b1d0.jpg",
+    "static/media/udv.png": "/static/media/udv.fb84e20b25bbf14271c0.png",
+    "static/media/nkBenedek.jpg": "/static/media/nkBenedek.aa3db9c242e88dbd7465.jpg",
+    "static/media/allampapirok.png": "/static/media/allampapirok.b9836de5d3578cd6a281.png",
+    "static/media/merryxmas.png": "/static/media/merryxmas.4901264d84ebdc7ea345.png",
+    "static/media/szemelyi_kolcson.png": "/static/media/szemelyi_kolcson.2a756eaea7ced9077b4c.png",
+    "static/media/healthcare00.png": "/static/media/healthcare00.0dfe70d76cd0f992477e.png",
+    "static/media/cspm_fb_ad_01.png": "/static/media/cspm_fb_ad_01.dbf44dd3c95d2f7258ab.png",
+    "static/media/karrier_lehetoseg.png": "/static/media/karrier_lehetoseg.ccc1527a7c8cf17a00d4.png",
+    "static/media/gkIlona.jpg": "/static/media/gkIlona.4c5a277ea844a7d05c63.jpg",
+    "static/media/favico_transparent_new.png": "/static/media/favico_transparent_new.b8e2b9a3bc75945d82e1.png",
+    "static/media/onyp.md": "/static/media/onyp.1d2643c1ba39df0b1172.md",
+    "static/media/allampapirok.md": "/static/media/allampapirok.15a9f9ba2e62808fca65.md",
+    "static/media/healthcare00.md": "/static/media/healthcare00.79484629666f7265076c.md",
+    "index.html": "/index.html",
+    "static/media/penzugy_karrier_hirdetes.md": "/static/media/penzugy_karrier_hirdetes.673e219974b5750cba05.md",
+    "static/media/szemelyi_kolcson.md": "/static/media/szemelyi_kolcson.cc6d5e044af9051f3a0d.md",
+    "static/media/udv.md": "/static/media/udv.d738c01f39c3fa25ddff.md",
+    "static/media/xmas25.md": "/static/media/xmas25.04682ead8c651d8cba19.md",
+    "main.56fccec9.css.map": "/static/css/main.56fccec9.css.map",
+    "main.5821c797.js.map": "/static/js/main.5821c797.js.map",
+    "453.5d8bf5df.chunk.js.map": "/static/js/453.5d8bf5df.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.56fccec9.css",
+    "static/js/main.5821c797.js"
+  ]
+}

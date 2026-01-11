@@ -4,7 +4,6 @@ import szkolcsonContent from './actualities/szemelyi_kolcson.md';
 import penzugyKarrierLehetosegContent from './actualities/penzugy_karrier_hirdetes.md';
 import udvContent from './actualities/udv.md';
 import healthCare00Content from './actualities/healthcare00.md';
-import xmas25Content from './actualities/xmas25.md';
 
 // Define your actuality data
 const actualitesData = [
@@ -50,13 +49,6 @@ const actualitesData = [
     image: require('./adbar/udv.png'),
     contentPath: udvContent,
     summary: 'Kollégáim és én azért dolgozunk, hogy Önnek a legjobb pénzügyi megoldásokat kínáljuk. Célunk, hogy segítsünk Önnek a pénzügyei kezelésében és a jövője biztosításában.'
-  },
-  {
-    id: 7,
-    title: 'Kellemes ünnepeket kívánunk!',
-    image: require('./adbar/merryxmas.png'),
-    contentPath: xmas25Content,
-    summary: 'Kellemes, békés, boldog és meghitt ünnepeket kívánunk mindenki számára!\n-- A CsPM csapata'
   },
 ];
 

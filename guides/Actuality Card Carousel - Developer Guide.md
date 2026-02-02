@@ -13,55 +13,66 @@ The Actuality Card Carousel displays a series of cards that automatically scroll
 
 ## Updating Actualities
 
-### File Structure
+### File Structure (Updated: February 2026)
 
 ```
 src/
 ├── assets/
-│   ├── adbar/             # Images for actualities
-│   │   ├── image1.jpg
-│   │   ├── image2.jpg
-│   │   └── ...
-│   ├── actualities/       # Markdown content files
-│   │   ├── actuality1.md
-│   │   ├── actuality2.md
-│   │   └── ...
-│   └── actualityData.js   # Data configuration file
+│   ├── images/
+│   │   └── actualities/       # Images for actuality cards
+│   │       ├── karrier_lehetoseg.png
+│   │       ├── szemelyi_kolcson.png
+│   │       └── ...
+│   └── content/
+│       └── actualities/       # Markdown content files
+│           ├── allampapirok.md
+│           ├── szemelyi_kolcson.md
+│           └── ...
+├── data/
+│   └── actualities.js         # Data configuration file
 └── components/
-    └── ActualityCardCarousel.jsx
+    └── features/
+        └── actualities/
+            └── ActualitiesCardCarousel.jsx
 ```
 
 ### Step 1: Prepare Your Content
 
-1. **Create a markdown file** for the actuality content in `src/assets/actualities/`
+1. **Create a markdown file** for the actuality content in `src/assets/content/actualities/`
    - Use descriptive filenames (e.g., `new-service-2025.md`)
    - Format your content using markdown syntax
 
-2. **Add your image** to `src/assets/adbar/`
+2. **Add your image** to `src/assets/images/actualities/`
    - Use optimized images (recommended size: 1200×800px)
-   - Use descriptive filenames (e.g., `new-service-2025.jpg`)
+   - Use descriptive filenames (e.g., `new-service-2025.png`)
 
 ### Step 2: Update the Data File
 
-Open `src/assets/actualityData.js` and add or modify entries:
+Open `src/data/actualities.js` and add or modify entries:
 
 ```javascript
-const actualityData = [
+import newServiceContent from '../assets/content/actualities/new-service-2025.md';
+
+const actualitiesData = [
   {
-    id: "actuality1",  // Unique identifier
-    title: "New Service Announcement",  // Card title
-    image: require("./adbar/new-service-2025.jpg"),  // Image path
-    contentPath: require("./actualities/new-service-2025.md"),  // Content path
-    summary: "Brief description of the new service we're offering starting May 2025."  // Card summary
+    id: 7,  // Use incrementing IDs - highest ID shows first!
+    title: "New Service Announcement",
+    image: require('../assets/images/actualities/new-service-2025.png'),
+    contentPath: newServiceContent,
+    summary: "Brief description of the new service we're offering."
   },
   // Other actualities...
 ];
 
-export default actualityData;
+// Data is automatically sorted by ID (descending) - newest first
+actualitiesData.sort((a, b) => b.id - a.id);
+
+export default actualitiesData;
 ```
 
+**Important:** The array is sorted by `id` in descending order, so items with higher IDs appear first. Simply assign the next highest ID to new entries.
+
 To **remove** an actuality, simply delete its entry from the array.
-To **reorder** actualities, change their order in the array.
 
 ### Step 3: Content Formatting Tips
 

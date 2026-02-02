@@ -4,10 +4,6 @@
  * Global application styles
  */
 
-html {
-  scroll-behavior: smooth;
-}
-
 .App {
   text-align: center;
 }

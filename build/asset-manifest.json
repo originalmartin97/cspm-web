@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.9d4ced30.css",
+    "main.css": "/static/css/main.9d9798c1.css",
     "main.js": "/static/js/main.524b5691.js",
     "static/media/_private.colleague-4.jpg": "/static/media/_private.colleague-4.b6ebea2e06ffbd2acfba.jpg",
     "static/media/elsoEvEredmeny.png": "/static/media/elsoEvEredmeny.1771088676c5d7936895.png",
@@ -21,11 +21,11 @@
     "static/media/penzugy_karrier_hirdetes.md": "/static/media/penzugy_karrier_hirdetes.673e219974b5750cba05.md",
     "static/media/szemelyi_kolcson.md": "/static/media/szemelyi_kolcson.cc6d5e044af9051f3a0d.md",
     "static/media/udv.md": "/static/media/udv.d738c01f39c3fa25ddff.md",
-    "main.9d4ced30.css.map": "/static/css/main.9d4ced30.css.map",
+    "main.9d9798c1.css.map": "/static/css/main.9d9798c1.css.map",
     "main.524b5691.js.map": "/static/js/main.524b5691.js.map"
   },
   "entrypoints": [
-    "static/css/main.9d4ced30.css",
+    "static/css/main.9d9798c1.css",
     "static/js/main.524b5691.js"
   ]
 }

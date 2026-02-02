@@ -1,15 +1,30 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# ===========================================
+# SENSITIVE / PERSONAL DATA PROTECTION
+# ===========================================
+
+# Any file with _private. prefix (anywhere in repo)
+**/_private.*
+
+# Any folder named _private (and all contents)
+**/_private/
+
+# ===========================================
+# DEPENDENCIES
+# ===========================================
 /node_modules
 /.pnp
 .pnp.js
 
-# testing
+# ===========================================
+# TESTING
+# ===========================================
 /coverage
 
-
-# misc
+# ===========================================
+# MISC
+# ===========================================
 .DS_Store
 .env.local
 .env.development.local

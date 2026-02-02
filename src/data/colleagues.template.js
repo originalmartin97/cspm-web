@@ -21,7 +21,7 @@
 // import colleague4Image from '../assets/images/_private/colleagues/_private.colleague-4.jpg';
 
 // Placeholder image for development (replace with actual import above)
-import placeholderImage from '../assets/placeholder.png';
+import placeholderImage from '../assets/images/misc/placeholder.png';
 
 const colleaguesData = [
   {

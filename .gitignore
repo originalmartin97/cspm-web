@@ -15,7 +15,7 @@
 # ===========================================
 
 # Archive of previous builds (not needed in repo)
-/builds_archive/
+# /builds_archive/
 
 # Development logs
 /logs/

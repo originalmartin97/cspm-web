@@ -14,8 +14,8 @@
 # PROJECT MANAGEMENT / NON-CODE FOLDERS
 # ===========================================
 
-# Archive of previous builds (not needed in repo)
-# /builds_archive/
+# Archive of previous builds and related files
+_archive
 
 # Development logs
 # /logs/
@@ -49,3 +49,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+

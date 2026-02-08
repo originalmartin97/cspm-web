@@ -24,38 +24,49 @@ npm run build
 ## 📁 Project Structure
 
 ```
-src/
-├── assets/
-│   ├── images/
-│   │   ├── logo/               # Brand logos and favicons
-│   │   ├── achievements/       # Achievement/award images
-│   │   ├── actualities/        # Images for news/actuality cards
-│   │   ├── misc/               # Other images (backgrounds, icons)
-│   │   └── _private/           # 🔒 Personal data (gitignored)
-│   └── content/
-│       └── actualities/        # Markdown content for actuality cards
+cspm-web/
+├── _archive/                   # 📦 Archived assets & builds (gitignored)
+│   ├── builds/                 # Previous production builds
+│   └── src/                    # Archived source files (images, content)
 │
-├── components/
-│   ├── common/                 # Reusable UI components (Button, Typography, etc.)
-│   ├── layout/                 # Page structure (Appbar, Screen, Footer)
-│   ├── navigation/             # Navigation components
-│   └── features/               # Feature-specific components
-│       ├── actualities/        # News carousel
-│       ├── services/           # Services section
-│       ├── colleagues/         # Team members section
-│       └── achievements/       # Achievements section
+├── guides/                     # 📖 Developer documentation
+├── logs/                       # 📝 Development logs & updates
 │
-├── data/                       # Static data definitions
-│   ├── actualities.js          # News/announcements data
-│   ├── services.js             # Services offered
-│   ├── achievements.js         # Awards and achievements
-│   └── _private/               # 🔒 Personal data (gitignored)
+├── public/                     # Static public assets
 │
-├── hooks/                      # Custom React hooks
-│   └── useScrollNavigation.js  # Smooth scroll navigation
-│
-└── theme/                      # Design system
-    └── colors.js               # Centralized brand colors
+└── src/
+    ├── assets/
+    │   ├── images/
+    │   │   ├── logo/               # Brand logos and favicons
+    │   │   ├── achievements/       # Achievement/award images
+    │   │   ├── actualities/        # Images for news/actuality cards
+    │   │   ├── misc/               # Other images (backgrounds, icons)
+    │   │   └── _private/           # 🔒 Personal data (gitignored)
+    │   └── content/
+    │       └── actualities/        # Markdown content for actuality cards
+    │
+    ├── components/
+    │   ├── common/                 # Reusable UI components (Button, Typography, etc.)
+    │   ├── layout/                 # Page structure (Appbar, Screen, Footer)
+    │   ├── navigation/             # Navigation components
+    │   ├── _unused/                # Deprecated/unused components
+    │   └── features/               # Feature-specific components
+    │       ├── actualities/        # News carousel
+    │       ├── services/           # Services section
+    │       ├── colleagues/         # Team members section
+    │       └── achievements/       # Achievements section
+    │
+    ├── data/                       # Static data definitions
+    │   ├── actualities.js          # News/announcements data
+    │   ├── services.js             # Services offered
+    │   ├── achievements.js         # Awards and achievements
+    │   └── _private/               # 🔒 Personal data (gitignored)
+    │
+    ├── hooks/                      # Custom React hooks
+    │   └── useScrollNavigation.js  # Smooth scroll navigation
+    │
+    └── theme/                      # Design system
+        └── colors.js               # Centralized brand colors
 ```
 
 ---
@@ -79,6 +90,16 @@ Personal information (colleague names, photos, bios) is stored in `_private/` fo
 3. Fill in the actual data in the copied file.
 
 **Naming Convention:** Files prefixed with `_private.` are automatically gitignored.
+
+---
+
+## 📦 Archive
+
+The `_archive/` directory at the project root is used to store:
+- **Previous builds** (`_archive/builds/`) - Old production builds for reference
+- **Archived source files** (`_archive/src/`) - Unused images, content, or assets that may be needed later
+
+This directory is **gitignored** to keep the repository clean while preserving assets locally.
 
 ---
 

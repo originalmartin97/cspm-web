@@ -33,9 +33,10 @@ _archive
 /coverage
 
 # ===========================================
-# PRODUCTION BUILD
+# CURRENT PRODUCTION BUILD
 # ===========================================
-/build
+/build/*
+!/build/*.zip
 
 # ===========================================
 # MISC

@@ -1,15 +1,30 @@
 import React from 'react'
-import MyTypography from './MyTypography'
+import { Box, Typography } from '@mui/material'
 
 const BottomBar = () => {
   return (
-      <MyTypography
+    <Box
+      component="footer"
+      sx={{
+        backgroundColor: 'rgba(40, 68, 115, 0.95)',
+        color: 'rgb(254, 247, 255)',
+        padding: { xs: 3, sm: 4, md: 5 },
+        textAlign: 'center',
+        borderTop: '1px solid rgba(166, 203, 232, 0.2)',
+        marginTop: 'auto',
+      }}
+    >
+      <Typography
+        variant="body2"
         sx={{
-          fontSize: '12px',
-          backgroundColor: 'rgb(0, 0, 0, 0.88)',
-          alignItems: 'center',
-          color: 'white',
-          textAlign: 'center',
+          fontSize: { xs: '0.8rem', sm: '0.85rem' },
+          lineHeight: 1.6,
+          maxWidth: '800px',
+          margin: '0 auto',
+          opacity: 0.9,
+          '& br': {
+            display: { xs: 'none', sm: 'block' },
+          },
         }}
       >
         A weboldalon található információk tájékoztató jellegűek és nem minősülnek szakmai tanácsadásnak.
@@ -24,7 +39,26 @@ const BottomBar = () => {
         <br/>
         A jelen jogi nyilatkozat bármikor módosítható. Kérjük, rendszeresen látogassa meg ezt az oldalt, hogy tájékozódjon a
         legfrissebb változásokról.
-      </MyTypography>
+      </Typography>
+      
+      <Box
+        sx={{
+          mt: 3,
+          pt: 2,
+          borderTop: '1px solid rgba(166, 203, 232, 0.2)',
+        }}
+      >
+        <Typography
+          variant="body2"
+          sx={{
+            fontSize: '0.75rem',
+            opacity: 0.7,
+          }}
+        >
+          © 2024 CsPM - Családod Pénzügyi Mentora. Minden jog fenntartva.
+        </Typography>
+      </Box>
+    </Box>
   )
 }
 

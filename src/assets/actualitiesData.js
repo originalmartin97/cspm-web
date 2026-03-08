@@ -2,8 +2,8 @@ import allampapirokContent from './actualities/allampapirok.md';
 import onypContent from './actualities/onyp.md';
 import szkolcsonContent from './actualities/szemelyi_kolcson.md';
 import penzugyKarrierLehetosegContent from './actualities/penzugy_karrier_hirdetes.md';
-import elderlyAd06Content from './actualities/elderly_ad_06.md';
 import udvContent from './actualities/udv.md';
+import healthCare00Content from './actualities/healthcare00.md';
 
 // Define your actuality data
 const actualitesData = [
@@ -38,10 +38,10 @@ const actualitesData = [
   },
   {
     id: 5,
-    title: 'Szeretnél biztonságban és gondtalanul élni nyugdíjas éveidben?',
-    image: require('./adbar/elderly_ad_06.png'),
-    contentPath: elderlyAd06Content,
-    summary: 'Most van itt az idő, hogy tegyél érte! Nyugdíjbiztosításainkkal biztonságban tudhatod a jövőd.'
+    title: 'Új Baleseti Biztosítási termékünk!',
+    image: require('./adbar/healthcare00.png'),
+    contentPath: healthCare00Content,
+    summary: 'Egy rossz lépés ne kerüljön sokba! Baleseti sérülésekre szóló kiegészítő, amely tényleg térít! 🩹'
   },
     {
     id: 6,

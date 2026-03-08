@@ -1,24 +1,31 @@
 // src/assets/colleaguesData.js
-import mkJulia from './mkJulia.jpg'
 import nkBenedek from './nkBenedek.jpg'
 import szfErzsebet from './szfErzsebet.jpg'
-import mLilla from './mLilla.jpg'
 import gkIlona from './gkIlona.jpg'
+import vDavid from './vDavid.jpeg'
 
 
 const colleaguesData = [
   {
-    id: 3,
-    name: 'Mészárosné Kocsi Júlia',
-    shortDescription: '36 éves vagyok. Orvoslaboratóriumi analitikus a végzettségem és 13 éve dolgozom az egészségügyben...',
-    longDescription: `36 éves vagyok. Orvoslaboratóriumi analitikus a végzettségem és 13 éve dolgozom az egészségügyben. A Metlife csapatát csak pár hónapja erősítem. A biztosítást azért választottam, mert látom a sok állami rendszerben eltöltött évemből és tapasztalatomból, mennyire fontos az öngondoskodás. Bízom benne, hogy a szaktudásommal hozzájárulhatok a sikerünkhöz és minél több ügyfelünknek segíthetünk.`,
-    image: mkJulia,
+    id: 4,
+    name: 'Varga Dávid',
+    shortDescription: '...azért választottam a pénzügyi területet, mert szeretnék valódi értéket adni az embereknek...',
+    longDescription: `
+                      Fiatal szakemberként azért választottam a pénzügyi területet, mert szeretnék valódi értéket adni az embereknek – legyen szó biztosításról, megtakarításról vagy egy hosszú távon működő pénzügyi stratégiáról.
+                      Fontos számomra, hogy az ügyfeleim ne érezzék magukat egyedül a döntéseikben. Hiszem, hogy megfelelő tájékoztatással és személyre szabott megoldásokkal mindenki képes lehet biztonságban tudni saját és családja jövőjét.
+                      A pénzügyi döntések nem egyik napról a másikra születnek – de a legjobb döntések mindig egy jó beszélgetéssel kezdődnek.
+                      `,
+    image: vDavid,
   },
+
   {
-    id: 5,
+    id: 3,
     name: 'Nagy Benedek Károly',
     shortDescription: `Nagy Benedek Károly vagyok, jogászhallgató, és a csapat legfiatalabb tagja. A biztosítások területén újnak számítok, azonban kollégáimnak köszönhetően...`,
-    longDescription: `Nagy Benedek Károly vagyok, jogászhallgató, és a csapat legfiatalabb tagja. A biztosítások területén újnak számítok, azonban kollégáimnak köszönhetően hamar felvettem a fonalat és napról napra azon vagyok, hogy egyre jobban megismerjem ezt a területet. Véleményem szerint manapság minden embernek szüksége van egy biztosításra, amely a nehéz helyzetekben segítséget nyújt. Célom, hogy az ügyféllel közösen egy olyan valós segítséget nyújtó biztosítást állítsunk össze, amely az ügyfél elégedettségét szolgálja és biztonságban tudhassa magát és családtagjait.`,
+    longDescription: `Nagy Benedek Károly vagyok, jogászhallgató, és a csapat legfiatalabb tagja.
+                      A biztosítások területén újnak számítok, azonban kollégáimnak köszönhetően hamar felvettem a fonalat és napról napra azon vagyok, hogy egyre jobban megismerjem ezt a területet.
+                      Véleményem szerint manapság minden embernek szüksége van egy biztosításra, amely a nehéz helyzetekben segítséget nyújt.
+                      Célom, hogy az ügyféllel közösen egy olyan valós segítséget nyújtó biztosítást állítsunk össze, amely az ügyfél elégedettségét szolgálja és biztonságban tudhassa magát és családtagjait.`,
     image: nkBenedek,
   },
   {
@@ -36,15 +43,6 @@ const colleaguesData = [
                         🤑Időt, energiát, pénzt spórolok Neked
                         😯Szolgáltatásom díjmentes❗️`,
     image: szfErzsebet,
-  },
-  {
-    id: 4,
-    name: 'Major Lilla',
-    shortDescription: `Major Lilla vagyok, eredeti végzettségemet tekintve közgazdász, és kertészmérnök. A diploma megszerzése után Magyarország egyik vezető bankjánál helyezkedtem el...`,
-    longDescription: `Major Lilla vagyok, eredeti végzettségemet tekintve közgazdász, és kertészmérnök. A diploma megszerzése után Magyarország egyik vezető bankjánál helyezkedtem el, a bank Telefonos Ügyfélszolgálatnál, későbbiekben bankfiókban segítettem az ügyfeleket a pénzügyi világban kalauzolni. Tevékenységem széles körű volt, a lakossági és a vállalati ügyfelekkel is foglalkoztam, a számlanyitástól, egészen a hitelezésig.
-                      Közel 2 éve döntöttem úgy, hogy a pénzügyi világból nem szeretnék kiszakadni, szeretek az embereknek segíteni, de ezt nem a bank szigorúan vett négy fala között folytatnám, hanem kicsit szabadabb, személyre szólóbb módon tenném, így kerültem a Családod Pénzügyi Mentora Csapatába, ahol elsődlegesen Hitel és bankügyletekben, és ehhez kapcsolódóan biztosítási területen is nagyon szívesen segítek az érdeklődőknek.
-                      Főbb területeim a személyi kölcsönök, hitelkiváltások, jelzálog ügyintézések, bankszámla kérdések, és természetesen az ehhez kapcsolódó biztosítások, akár cégként, akár magánemberként, így komplex pénzügyi segítséget vehet igénybe egy személytől.`,
-    image: mLilla,
   },
   {
     id: 1,

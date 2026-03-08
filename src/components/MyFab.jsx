@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Fab from '@mui/material/Fab'
-import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
-import handleButtonClick from '../functions/handleButtonClick'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import handleButtonClickNavigation from '../functions/handleButtonClickNavigation'
 
 
 // MyFab component definition
@@ -43,17 +43,26 @@ const MyFab = () => {
       {/* Floating Action Button (FAB) */}
       <Fab
         sx={{
-          position: 'fixed', // Fixed position on the screen
-          bottom: 16, // 16px from the bottom
-          right: 16, // 16px from the right
-          zIndex: 1000, // High z-index to appear above other elements
-          backgroundColor: 'rgb(40, 68, 115)', // Custom background color
-          color: 'rgb(254, 247, 255)', // Custom text/icon color
-          display: visible ? 'flex' : 'none', // Show or hide based on visibility state
+          position: 'fixed',
+          bottom: 24, // Increased from 16px for better spacing
+          right: 24, // Increased from 16px for better spacing
+          zIndex: 1000,
+          backgroundColor: 'rgba(40, 68, 115, 0.9)',
+          color: 'rgb(254, 247, 255)',
+          display: visible ? 'flex' : 'none',
+          boxShadow: '0 4px 16px rgba(40, 68, 115, 0.3)',
+          border: '1px solid rgba(40, 68, 115, 0.2)',
+          '&:hover': {
+            backgroundColor: 'rgba(40, 68, 115, 1)',
+            transform: 'translateY(-2px) scale(1.05)',
+            boxShadow: '0 6px 20px rgba(40, 68, 115, 0.4)',
+          },
+          transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
-        onClick={() => handleButtonClick('top')} // Handle button click to scroll to top
+        onClick={() => handleButtonClickNavigation('top')}
+        aria-label="Scroll to top"
       >
-        <ArrowDropUpIcon /> {/* Up arrow icon inside the button */}
+        <KeyboardArrowUpIcon /> {/* Up arrow icon inside the button */}
       </Fab>
     </>
   )

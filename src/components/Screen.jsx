@@ -1,58 +1,50 @@
 import React from 'react'
-import { Container } from '@mui/material'
+import { Helmet } from 'react-helmet'
+import { Container, Grid } from '@mui/material'
 import Appbar from './Appbar'
-import MyPaper from './MyPaper'
 import Section from './Section'
 import MyTypography from './MyTypography'
 import BottomBar from './BottomBar'
-import ContactForm from './ContactForm'
 import Colleagues from './Colleagues'
 import MyFab from './MyFab'
-import MyAccrodion from './MyAccordion'
-import ImageSlider from './ImageSlider'
-
-
+import Services from './Services'
+import ActualitiesCardCarousel from './ActualitiesCardCarousel'
+import Achievements from './Achievements'
 
 const Screen = () => {
   return (
     <>
+      <Helmet>
+        <link rel="canonical" href="https://csaladodpenzugyimentora.hu/" />
+      </Helmet>
       <Appbar />
-      <Container
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          marginTop: '76px',
-          marginBottom: '6px',
-        }}
-      >
-        <MyPaper>
-          <ImageSlider />
-            <MyTypography>
-            <h4>
-              Kollégáimmal együtt feladatunk, hogy segítséget nyújtsunk 
-              minden érdeklődőnek és ügyfelünknek az anyagi stabilitásuk 
-              és 
-              jövőbeni céljaik biztonságos megvalósításához.
-            </h4>
-            </MyTypography>
-          <Section id="szolgaltatasok">
-            <MyTypography>
-              Szolgáltatásaink
-            </MyTypography>
-            <MyAccrodion />
-          </Section>
-          <Section id="munkatarsak">
-            <MyTypography>
-              Munkatársaink
-            </MyTypography>
-            <Colleagues />
-          </Section>
+      <ActualitiesCardCarousel />
+      <Container maxWidth="xl" sx={{ py: { xs: 4, sm: 5, md: 6 } }}>
+        <Grid container spacing={{ xs: 4, md: 5 }} sx={{ mt: 0 }}>
+          {/* Services Section */}
+          <Grid item xs={12} md={6} lg={6}>
+            <Section id="szolgaltatasok" sx={{ height: '100%' }}>
+              <MyTypography>Szolgáltatások</MyTypography>
+              <Services />
+            </Section>
+          </Grid>
           
-          <Section id="kapcsolat">
-            <ContactForm label="Kapcsolat" />
-          </Section>
-        </MyPaper>
+          {/* Achievements Section */}
+          <Grid item xs={12} md={6} lg={6}>
+            <Section id="eredmenyek" sx={{ height: '100%' }}>
+              <MyTypography>Eredmények</MyTypography>
+              <Achievements />
+            </Section>
+          </Grid>
+          
+          {/* Colleagues Section - Always full width */}
+          <Grid item xs={12}>
+            <Section id="munkatarsak">
+              <MyTypography>Munkatársak</MyTypography>
+              <Colleagues />
+            </Section>
+          </Grid>
+        </Grid>
       </Container>
       <MyFab />
       <BottomBar />

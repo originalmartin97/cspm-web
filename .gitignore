@@ -1,15 +1,46 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# ===========================================
+# SENSITIVE / PERSONAL DATA PROTECTION
+# ===========================================
+
+# Any file with _private. prefix (anywhere in repo)
+**/_private.*
+
+# Any folder named _private (and all contents)
+**/_private/
+
+# ===========================================
+# PROJECT MANAGEMENT / NON-CODE FOLDERS
+# ===========================================
+
+# Archive of previous builds and related files
+_archive
+
+# Development logs
+# /logs/
+
+# ===========================================
+# DEPENDENCIES
+# ===========================================
 /node_modules
 /.pnp
 .pnp.js
 
-# testing
+# ===========================================
+# TESTING
+# ===========================================
 /coverage
 
+# ===========================================
+# CURRENT PRODUCTION BUILD
+# ===========================================
+/build/*
+!/build/*.zip
 
-# misc
+# ===========================================
+# MISC
+# ===========================================
 .DS_Store
 .env.local
 .env.development.local
@@ -19,3 +50,4 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+

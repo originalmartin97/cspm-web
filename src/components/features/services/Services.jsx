@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Card, CardContent, Modal, Paper, IconButton, Box } from '@mui/material'
+import { Card, CardContent, Modal, Paper, IconButton, Box, Typography as MuiTypography } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined'
 import Typography from '../../common/Typography'
@@ -136,7 +136,7 @@ const Services = () => {
           
           {selectedService && (
             <>
-              <Typography 
+              <MuiTypography
                 variant="h4" 
                 component="h2"
                 id="service-modal-title"
@@ -148,9 +148,9 @@ const Services = () => {
                 }}
               >
                 {selectedService.title}
-              </Typography>
+              </MuiTypography>
               
-              <Typography
+              <MuiTypography
                 id="service-modal-description"
                 variant="body1"
                 sx={{ 

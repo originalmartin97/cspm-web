@@ -7,12 +7,14 @@ const Typography = ({
   variant = "h4", 
   component = "h2",
   showUnderline = true,
-  textAlign = 'center'
+  textAlign = 'center',
+  ...rest
 }) => {
   return (
     <MuiTypography
       variant={variant}
       component={component}
+      {...rest}
       sx={{
         fontWeight: 700,
         textAlign: textAlign,

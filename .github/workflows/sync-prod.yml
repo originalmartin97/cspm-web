@@ -1,0 +1,48 @@
+name: Sync prod branch
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git identity
+        run: |
+          git config user.name  "prod-sync-bot"
+          git config user.email "prod-sync-bot@users.noreply.github.com"
+
+      - name: Sync prod from main subset
+        env:
+          KEEP: "build"    # space-separated list if you add more
+        run: |
+          git fetch origin
+
+          # Use the existing prod branch; don't recreate it
+          git checkout prod 2>/dev/null || git checkout -b prod origin/prod
+
+          # Replace each kept directory with main's current contents
+          for d in $KEEP; do
+            git rm -rf -- "$d" 2>/dev/null || true
+            git checkout origin/main -- "$d"
+          done
+
+          # Defensive: remove anything outside KEEP
+          PATTERN="^($(echo $KEEP | tr ' ' '|'))/"
+          git ls-files -z | grep -zvE "$PATTERN" | xargs -0 -r git rm -f
+
+          git add -A
+          if git diff --cached --quiet; then
+            echo "prod already up to date."
+          else
+            git commit -m "Sync prod from main @ ${GITHUB_SHA::7}"
+            git push origin prod
+          fi

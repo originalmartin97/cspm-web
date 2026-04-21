@@ -24,25 +24,43 @@ jobs:
         env:
           KEEP: "build"    # space-separated list if you add more
         run: |
+          set -euo pipefail
           git fetch origin
 
           # Use the existing prod branch; don't recreate it
           git checkout prod 2>/dev/null || git checkout -b prod origin/prod
+          git reset --hard origin/prod
+
+          # Use the triggering commit on push, otherwise latest main for manual runs
+          SOURCE_REF="${GITHUB_SHA:-origin/main}"
+
+          IFS=' ' read -r -a keep_dirs <<< "$KEEP"
+          if [ "${#keep_dirs[@]}" -eq 0 ] || [ -z "$(printf '%s' "$KEEP" | tr -d '[:space:]')" ]; then
+            echo "KEEP must contain at least one directory" >&2
+            exit 1
+          fi
 
           # Replace each kept directory with main's current contents
-          for d in $KEEP; do
+          for d in "${keep_dirs[@]}"; do
             git rm -rf -- "$d" 2>/dev/null || true
-            git checkout origin/main -- "$d"
+            git checkout "$SOURCE_REF" -- "$d"
           done
 
           # Defensive: remove anything outside KEEP
-          PATTERN="^($(echo $KEEP | tr ' ' '|'))/"
+          pattern_parts=()
+          for d in "${keep_dirs[@]}"; do
+            escaped_d=$(printf '%s\n' "$d" | sed 's/[][(){}.^$*+?|\\]/\\&/g')
+            pattern_parts+=("$escaped_d")
+          done
+          PATTERN="^($(IFS='|'; echo "${pattern_parts[*]}"))/"
           git ls-files -z | grep -zvE "$PATTERN" | xargs -0 -r git rm -f
 
           git add -A
           if git diff --cached --quiet; then
             echo "prod already up to date."
           else
-            git commit -m "Sync prod from main @ ${GITHUB_SHA::7}"
+            source_short_sha=$(git rev-parse --short "$SOURCE_REF")
+            git commit -m "Sync prod from main @ ${source_short_sha}"
             git push origin prod
+          fi
           fi

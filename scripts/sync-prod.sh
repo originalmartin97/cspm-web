@@ -4,6 +4,11 @@ set -euo pipefail
 # Directories to keep on prod — edit this list
 KEEP=(build)
 
+if [[ "${#KEEP[@]}" -eq 0 ]]; then
+  echo "KEEP must contain at least one directory." >&2
+  exit 1
+fi
+
 git fetch origin
 
 # Switch to the existing prod branch (create local tracking if needed)
@@ -17,7 +22,12 @@ for d in "${KEEP[@]}"; do
 done
 
 # Defensive sweep: drop anything that somehow ended up outside KEEP
-PATTERN="^($(IFS='|'; echo "${KEEP[*]}"))/"
+ESCAPED_KEEP=()
+for d in "${KEEP[@]}"; do
+  escaped_d=$(printf '%s' "$d" | sed 's/[][(){}.^$*+?|\\]/\\&/g')
+  ESCAPED_KEEP+=("$escaped_d")
+done
+PATTERN="^($(IFS='|'; echo "${ESCAPED_KEEP[*]}"))/"
 git ls-files -z | grep -zvE "$PATTERN" | xargs -0 -r git rm -f
 
 git add -A

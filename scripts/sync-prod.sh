@@ -28,7 +28,7 @@ for d in "${KEEP[@]}"; do
   ESCAPED_KEEP+=("$escaped_d")
 done
 PATTERN="^($(IFS='|'; echo "${ESCAPED_KEEP[*]}"))/"
-git ls-files -z | grep -zvE "$PATTERN" | xargs -0 -r git rm -f
+git ls-files -z | grep -zvE "$PATTERN" | xargs -0 -r git rm -f || true
 
 git add -A
 if git diff --cached --quiet; then

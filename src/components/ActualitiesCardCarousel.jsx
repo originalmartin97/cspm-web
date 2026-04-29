@@ -67,9 +67,7 @@ const ActualityCardCarousel = () => {
       
       // Load content for the next actuality
       try {
-        const response = await fetch(nextActuality.contentPath);
-        const text = await response.text();
-        setMarkdownContent(text);
+        setMarkdownContent(nextActuality.contentPath);
       } catch (error) {
         console.error("Failed to load markdown content:", error);
         setMarkdownContent('Failed to load content');
@@ -147,9 +145,7 @@ const ActualityCardCarousel = () => {
     setModalOpen(true);
     
     try {
-      const response = await fetch(actuality.contentPath);
-      const text = await response.text();
-      setMarkdownContent(text);
+      setMarkdownContent(actuality.contentPath);
     } catch (error) {
       console.error("Failed to load markdown content:", error);
       setMarkdownContent('Failed to load content');
@@ -690,18 +686,14 @@ const ActualityCardCarousel = () => {
                         setLoading(true);
                         setSelectedActuality(targetActuality);
                         
-                        fetch(targetActuality.contentPath)
-                          .then(response => response.text())
-                          .then(text => {
-                            setMarkdownContent(text);
-                          })
-                          .catch(error => {
-                            console.error("Failed to load markdown content:", error);
-                            setMarkdownContent('Failed to load content');
-                          })
-                          .finally(() => {
-                            setLoading(false);
-                          });
+                        try {
+                          setMarkdownContent(targetActuality.contentPath);
+                        } catch (error) {
+                          console.error("Failed to load markdown content:", error);
+                          setMarkdownContent('Failed to load content');
+                        } finally {
+                          setLoading(false);
+                        }
                       }
                     }
                   }}

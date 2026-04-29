@@ -119,6 +119,30 @@ This directory is **gitignored** to keep the repository clean while preserving a
 
 ---
 
+## 🌿 Branching & Deployment Pipeline
+
+The project follows a three-branch pipeline:
+
+```
+dev-test  →  main  →  prod
+```
+
+| Branch     | Purpose |
+|------------|---------|
+| `dev-test` | Active development and testing |
+| `main`     | Interval/staging point; merges from `dev-test` before production |
+| `prod`     | Live production branch; receives the built output from `main` |
+
+### Why `build/` is committed
+
+Unlike a typical setup where build artifacts are gitignored, **this repository intentionally commits the `build/` directory**. The `prod` branch is updated directly from the built output generated in `main`, so the build artifacts must be part of version control to flow through the pipeline.
+
+- Run `npm run build` after finalizing changes on `main`.
+- Commit the updated `build/` directory as part of the release.
+- Merge `main` → `prod` to deploy.
+
+---
+
 ## 📖 Documentation
 
 - **Developer Guides:** See `/guides/` directory
@@ -129,6 +153,8 @@ This directory is **gitignored** to keep the repository clean while preserving a
 ## 🛠 Tech Stack
 
 - **React 18** - UI framework
+- **Vite** - Build tool & dev server (replaces Create React App)
+- **Vitest** - Unit testing
 - **Material-UI (MUI) 6** - Component library
 - **react-markdown** - Markdown rendering
 - **react-slick** - Carousel functionality

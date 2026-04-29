@@ -15,9 +15,25 @@ npm install
 # Start development server
 npm start
 
+# Start dev server in extended mode for browser/remote reachability
+npm run start:ext
+
 # Build for production
 npm run build
 ```
+
+## VS Code Browser Pane
+
+`npm` can start the dev server, but it cannot open VS Code's integrated browser pane by itself.
+
+Use this flow instead:
+
+1. Run `npm run start:ext`.
+2. In VS Code, open the Command Palette.
+3. Run `Simple Browser: Show`.
+4. Enter `http://localhost:5173/`.
+
+`npm run start:ext:open` still exists, but it opens the system browser, not the VS Code browser pane.
 
 ---
 

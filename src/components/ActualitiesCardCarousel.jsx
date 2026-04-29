@@ -66,14 +66,8 @@ const ActualityCardCarousel = () => {
       setSelectedActuality(nextActuality);
       
       // Load content for the next actuality
-      try {
-        setMarkdownContent(nextActuality.contentPath);
-      } catch (error) {
-        console.error("Failed to load markdown content:", error);
-        setMarkdownContent('Failed to load content');
-      } finally {
-        setLoading(false);
-      }
+      setMarkdownContent(nextActuality.contentPath);
+      setLoading(false);
     };
     
     navigateModal(direction);
@@ -144,14 +138,8 @@ const ActualityCardCarousel = () => {
     setLoading(true);
     setModalOpen(true);
     
-    try {
-      setMarkdownContent(actuality.contentPath);
-    } catch (error) {
-      console.error("Failed to load markdown content:", error);
-      setMarkdownContent('Failed to load content');
-    } finally {
-      setLoading(false);
-    }
+    setMarkdownContent(actuality.contentPath);
+    setLoading(false);
   };
 
   // Handle closing the modal
@@ -685,15 +673,8 @@ const ActualityCardCarousel = () => {
                       if (targetActuality.id !== selectedActuality.id) {
                         setLoading(true);
                         setSelectedActuality(targetActuality);
-                        
-                        try {
-                          setMarkdownContent(targetActuality.contentPath);
-                        } catch (error) {
-                          console.error("Failed to load markdown content:", error);
-                          setMarkdownContent('Failed to load content');
-                        } finally {
-                          setLoading(false);
-                        }
+                        setMarkdownContent(targetActuality.contentPath);
+                        setLoading(false);
                       }
                     }
                   }}

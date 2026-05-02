@@ -6,6 +6,7 @@ import Section from '../common/Section'
 import Typography from '../common/Typography'
 import BottomBar from './BottomBar'
 import Colleagues from '../features/colleagues/Colleagues'
+import DocumentsSection from '../features/documents/DocumentsSection'
 import ScrollToTopFab from './ScrollToTopFab'
 import Services from '../features/services/Services'
 import ActualitiesCardCarousel from '../features/actualities/ActualitiesCardCarousel'
@@ -42,6 +43,14 @@ const Screen = () => {
             <Section id="munkatarsak">
               <Typography>Munkatársak</Typography>
               <Colleagues />
+            </Section>
+          </Grid>
+
+          {/* Documents Section - Always full width */}
+          <Grid item xs={12}>
+            <Section id="dokumentumok">
+              <Typography>Dokumentumok</Typography>
+              <DocumentsSection />
             </Section>
           </Grid>
         </Grid>

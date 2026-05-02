@@ -49,6 +49,7 @@ cspm-web/
 ├── logs/                       # 📝 Development logs & updates
 │
 ├── public/                     # Static public assets
+│   └── documents/              # PDF documents served to users
 │
 └── src/
     ├── assets/
@@ -70,12 +71,14 @@ cspm-web/
     │       ├── actualities/        # News carousel
     │       ├── services/           # Services section
     │       ├── colleagues/         # Team members section
-    │       └── achievements/       # Achievements section
+    │       ├── achievements/       # Achievements carousel
+    │       └── documents/          # Documents section & PDF viewer
     │
     ├── data/                       # Static data definitions
     │   ├── actualities.js          # News/announcements data
     │   ├── services.js             # Services offered
     │   ├── achievements.js         # Awards and achievements
+    │   ├── documents.js            # PDF documents metadata
     │   └── _private/               # 🔒 Personal data (gitignored)
     │
     ├── hooks/                      # Custom React hooks

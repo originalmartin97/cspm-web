@@ -3,7 +3,7 @@ import { Card, CardMedia, CardContent, Typography, Modal, Paper, IconButton, Box
 import Grid from '@mui/material/Grid2'
 import CloseIcon from '@mui/icons-material/Close'
 import VisibilityIcon from '@mui/icons-material/Visibility'
-import colleaguesData from '../../../data/colleaguesData'
+import colleaguesData from '../../../data/colleagues'
 import TypographyBody2 from '../../common/TypographyBody2'
 
 const Colleagues = () => {

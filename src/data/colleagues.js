@@ -1,4 +1,4 @@
-// src/assets/colleaguesData.js
+// src/data/colleagues.js
 import nkBenedek from '../assets/images/colleagues/nkBenedek.jpg'
 import szfErzsebet from '../assets/images/colleagues/szfErzsebet.jpg'
 import gkIlona from '../assets/images/colleagues/gkIlona.jpg'

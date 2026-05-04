@@ -45,6 +45,8 @@ cspm-web/
 │   ├── builds/                 # Previous production builds
 │   └── src/                    # Archived source files (images, content)
 │
+├── _archives/                  # 📦 Archived source files from refactoring (gitignored)
+│
 ├── guides/                     # 📖 Developer documentation
 ├── logs/                       # 📝 Development logs & updates
 │
@@ -57,16 +59,15 @@ cspm-web/
     │   │   ├── logo/               # Brand logos and favicons
     │   │   ├── achievements/       # Achievement/award images
     │   │   ├── actualities/        # Images for news/actuality cards
-    │   │   ├── misc/               # Other images (backgrounds, icons)
+    │   │   ├── misc/               # Other images (backgrounds, placeholders)
     │   │   └── _private/           # 🔒 Personal data (gitignored)
     │   └── content/
     │       └── actualities/        # Markdown content for actuality cards
     │
     ├── components/
-    │   ├── common/                 # Reusable UI components (Button, Typography, etc.)
-    │   ├── layout/                 # Page structure (Appbar, Screen, Footer)
+    │   ├── common/                 # Reusable UI components (Typography, Section, etc.)
+    │   ├── layout/                 # Page structure (Appbar, Screen, BottomBar)
     │   ├── navigation/             # Navigation components
-    │   ├── _unused/                # Deprecated/unused components
     │   └── features/               # Feature-specific components
     │       ├── actualities/        # News carousel
     │       ├── services/           # Services section
@@ -78,7 +79,9 @@ cspm-web/
     │   ├── actualities.js          # News/announcements data
     │   ├── services.js             # Services offered
     │   ├── achievements.js         # Awards and achievements
+    │   ├── colleagues.js           # Colleagues/team data
     │   ├── documents.js            # PDF documents metadata
+    │   ├── colleagues.template.js  # Template for private colleague data setup
     │   └── _private/               # 🔒 Personal data (gitignored)
     │
     ├── hooks/                      # Custom React hooks
@@ -118,7 +121,9 @@ The `_archive/` directory at the project root is used to store:
 - **Previous builds** (`_archive/builds/`) - Old production builds for reference
 - **Archived source files** (`_archive/src/`) - Unused images, content, or assets that may be needed later
 
-This directory is **gitignored** to keep the repository clean while preserving assets locally.
+The `_archives/` directory holds files removed during refactoring (duplicate components, unused content, old utility files). Review and delete when no longer needed.
+
+Both directories are **gitignored** to keep the repository clean while preserving assets locally.
 
 ---
 

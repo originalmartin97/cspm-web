@@ -1,8 +1,8 @@
 // src/assets/colleaguesData.js
-import nkBenedek from './nkBenedek.jpg'
-import szfErzsebet from './szfErzsebet.jpg'
-import gkIlona from './gkIlona.jpg'
-import vDavid from './vDavid.jpeg'
+import nkBenedek from '../assets/images/colleagues/nkBenedek.jpg'
+import szfErzsebet from '../assets/images/colleagues/szfErzsebet.jpg'
+import gkIlona from '../assets/images/colleagues/gkIlona.jpg'
+import vDavid from '../assets/images/colleagues/vDavid.jpeg'
 
 
 const colleaguesData = [

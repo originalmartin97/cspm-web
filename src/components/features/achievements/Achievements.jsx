@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
-import { Box, Card, CardActionArea, CardContent, CardMedia, IconButton, Stack, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, IconButton, Stack, Typography } from '@mui/material'
+import TypographyBody2 from '../../common/TypographyBody2'
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import achievementsData from '../../../data/achievements'
@@ -29,11 +30,11 @@ const Achievements = () => {
     >
       <Stack
         direction="row"
-        justifyContent="space-between"
+        justifyContent="center"
         alignItems="center"
         sx={{ mb: 2 }}
       >
-        <Stack direction="row" spacing={1}>
+        <Stack direction="row" spacing={1} alignItems="center">
           <IconButton
             onClick={() => scrollCarousel('prev')}
             aria-label="Eredmények előző kártya"
@@ -91,57 +92,48 @@ const Achievements = () => {
             <Card
               key={achievement.id}
               sx={{
-                //flex: '0 0 min(88vw, 520px)',
                 scrollSnapAlign: 'start',
                 borderRadius: '24px',
                 overflow: 'hidden',
-                // border: '1px solid rgba(40, 68, 115, 0.08)',
                 boxShadow: '0px 4px 8px rgba(40, 68, 115, 0.12)',
-                background: 'linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,249,252,0.98))',
+                border: '1px solid rgba(40, 68, 115, 0.08)',
+                backgroundColor: 'rgba(255, 255, 255, 0.98)',
+                width: '100%',
+                position: 'relative',
               }}
             >
-              <CardActionArea sx={{ height: '100%', alignItems: 'stretch', cursor: 'default' }}>
-                <CardMedia
-                  component="img"
-                  image={achievement.image}
-                  alt={achievement.name}
-                  sx={{
-                    height: { xs: 240, sm: 280, md: 320 },
-                    objectFit: 'cover',
-                  }}
-                />
+              <CardMedia
+                component="img"
+                image={achievement.image}
+                alt={achievement.name}
+                sx={{
+                  height: { xs: 240, sm: 280, md: 320 },
+                  objectFit: 'cover',
+                }}
+              />
+              <CardContent
+                sx={{
+                  p: { xs: 2.5, sm: 3 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 1.2,
+                }}
+              >
+                <TypographyBody2>
+                  {achievement.name}
+                </TypographyBody2>
 
-                <CardContent
+                <Typography
+                  variant="body2"
                   sx={{
-                    p: { xs: 2.5, sm: 3 },
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 1.2,
+                    color: 'rgba(40, 68, 115, 0.78)',
+                    textAlign: 'center',
+                    
                   }}
                 >
-                  <Typography
-                    variant="h5"
-                    component="h3"
-                    sx={{
-                      color: 'rgba(40, 68, 115, 0.96)',
-                      fontWeight: 800,
-                      lineHeight: 1.15,
-                    }}
-                  >
-                    {achievement.name}
-                  </Typography>
-
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: 'rgba(40, 68, 115, 0.78)',
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    {achievement.description}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
+                  {achievement.description}
+                </Typography>
+              </CardContent>
             </Card>
           ))}
       </Box>

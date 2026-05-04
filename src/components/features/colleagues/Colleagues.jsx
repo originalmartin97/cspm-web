@@ -3,7 +3,7 @@ import { Card, CardMedia, CardContent, Typography, Modal, Paper, IconButton, Box
 import Grid from '@mui/material/Grid2'
 import CloseIcon from '@mui/icons-material/Close'
 import VisibilityIcon from '@mui/icons-material/Visibility'
-import colleaguesData from '../../../data/_private/_private.colleagues'
+import colleaguesData from '../../../assets/colleaguesData'
 
 const Colleagues = () => {
   const [modalOpen, setModalOpen] = useState(false)

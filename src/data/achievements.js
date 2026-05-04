@@ -5,7 +5,7 @@ const achievementsData = [
     {
         id: 1,
         name: 'Az első évünk eredménye.',
-        description: 'Az első évünk eredménye: Bronz érem az értékesítési versenyben.',
+        description: 'Bronz érem az értékesítési versenyben.',
         image: elsoEvEredmeny,
     },
 ]

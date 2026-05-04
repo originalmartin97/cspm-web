@@ -3,7 +3,8 @@ import { Card, CardMedia, CardContent, Typography, Modal, Paper, IconButton, Box
 import Grid from '@mui/material/Grid2'
 import CloseIcon from '@mui/icons-material/Close'
 import VisibilityIcon from '@mui/icons-material/Visibility'
-import colleaguesData from '../../../assets/colleaguesData'
+import colleaguesData from '../../../data/colleagues'
+import TypographyBody2 from '../../common/TypographyBody2'
 
 const Colleagues = () => {
   const [modalOpen, setModalOpen] = useState(false)
@@ -102,16 +103,10 @@ const Colleagues = () => {
                   p: 2,
                 }}
               >
-                <Typography
-                  gutterBottom
-                  variant="h5"
-                  component="div"
-                  sx={{ mb: 2 }}
-                >
+                <TypographyBody2 sx={{ mb: 2 }}>
                   {colleague.name}
-                </Typography>
+                </TypographyBody2>
                 <Typography
-                  variant="body2"
                   sx={{ 
                     textAlign: 'justify', 
                     flexGrow: 1,
@@ -119,6 +114,7 @@ const Colleagues = () => {
                     display: '-webkit-box',
                     WebkitLineClamp: 4, // Limit to 4 lines for consistency
                     WebkitBoxOrient: 'vertical',
+                    color: 'rgba(40, 68, 115, 0.78)'
                   }}
                   dangerouslySetInnerHTML={{
                     __html: colleague.shortDescription.replace(/\n/g, '<br />')
@@ -179,19 +175,16 @@ const Colleagues = () => {
           
           {selectedColleague && (
             <>
-              <Typography 
-                variant="h4" 
-                component="h2"
+              <TypographyBody2
                 id="colleague-modal-title"
-                sx={{ 
+                sx={{
                   mb: 3,
-                  fontWeight: 'bold',
-                  pr: 4, // Space for close button
-                  textAlign: 'center'
+                  pr: 4,
+                  fontSize: { xs: '1.3rem', sm: '1.5rem', md: '1.6rem' },
                 }}
               >
                 {selectedColleague.name}
-              </Typography>
+              </TypographyBody2>
               
               <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
                 <CardMedia

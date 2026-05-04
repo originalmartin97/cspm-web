@@ -1,116 +1,94 @@
-import React, { useRef } from 'react'
-import { Box, Card, CardActionArea, CardContent, CardMedia, IconButton, Stack, Typography } from '@mui/material'
+import React, { useState, useEffect, useCallback } from 'react'
+import { Box, Card, CardContent, CardMedia, IconButton, Typography } from '@mui/material'
+import TypographyBody2 from '../../common/TypographyBody2'
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import achievementsData from '../../../data/achievements'
+import { useSwipeable } from 'react-swipeable'
+
+const sorted = [...achievementsData].sort((a, b) => a.id - b.id)
 
 const Achievements = () => {
-  const carouselRef = useRef(null)
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [isHovering, setIsHovering] = useState(false)
 
-  const scrollCarousel = (direction) => {
-    const container = carouselRef.current
-    if (!container) return
-
-    const scrollAmount = Math.round(container.clientWidth * 0.82)
-    container.scrollBy({
-      left: direction === 'next' ? scrollAmount : -scrollAmount,
-      behavior: 'smooth',
+  const navigate = useCallback((direction) => {
+    if (isTransitioning) return
+    setIsTransitioning(true)
+    setCurrentIndex((prev) => {
+      if (direction === 'next') return (prev + 1) % sorted.length
+      return prev === 0 ? sorted.length - 1 : prev - 1
     })
-  }
+    setTimeout(() => setIsTransitioning(false), 600)
+  }, [isTransitioning])
+
+  useEffect(() => {
+    if (isHovering) return
+    const id = setInterval(() => navigate('next'), 5000)
+    return () => clearInterval(id)
+  }, [isHovering, navigate])
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => navigate('next'),
+    onSwipedRight: () => navigate('prev'),
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true,
+  })
 
   return (
     <Box
-      sx={{
-        position: 'relative',
-        mt: 2,
-      }}
+      sx={{ position: 'relative', mt: 2 }}
       role="region"
       aria-label="Eredmények carousel"
     >
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-        sx={{ mb: 2 }}
-      >
-        <Stack direction="row" spacing={1}>
-          <IconButton
-            onClick={() => scrollCarousel('prev')}
-            aria-label="Eredmények előző kártya"
-            sx={{
-              backgroundColor: 'rgba(40, 68, 115, 0.06)',
-              border: '1px solid rgba(40, 68, 115, 0.12)',
-              '&:hover': { backgroundColor: 'rgba(40, 68, 115, 0.1)' },
-            }}
-          >
-            <KeyboardArrowLeftIcon />
-          </IconButton>
-          <IconButton
-            onClick={() => scrollCarousel('next')}
-            aria-label="Eredmények következő kártya"
-            sx={{
-              backgroundColor: 'rgba(40, 68, 115, 0.06)',
-              border: '1px solid rgba(40, 68, 115, 0.12)',
-              '&:hover': { backgroundColor: 'rgba(40, 68, 115, 0.1)' },
-            }}
-          >
-            <KeyboardArrowRightIcon />
-          </IconButton>
-        </Stack>
-      </Stack>
-
+      {/* Slide viewport */}
       <Box
-        ref={carouselRef}
+        {...swipeHandlers}
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
         sx={{
-          display: 'flex',
-          gap: 2.5,
-          overflowX: 'auto',
-          overflowY: 'visible',
-          scrollSnapType: 'x mandatory',
-          scrollBehavior: 'smooth',
-          pb: 1.5,
-          px: { xs: 0.5, sm: 0.75 },
-          mx: { xs: -0.5, sm: -0.75 },
-          WebkitOverflowScrolling: 'touch',
-          '&::-webkit-scrollbar': {
-            height: 8,
-          },
-          '&::-webkit-scrollbar-thumb': {
-            backgroundColor: 'rgba(40, 68, 115, 0.18)',
-            borderRadius: 999,
-          },
-          '&::-webkit-scrollbar-track': {
-            backgroundColor: 'rgba(40, 68, 115, 0.06)',
-            borderRadius: 999,
-          },
+          width: '100%',
+          borderRadius: '24px',
+          overflow: 'hidden',
+          boxShadow: '0 8px 32px rgba(40, 68, 115, 0.15)',
         }}
       >
-        {achievementsData
-          .sort((a, b) => a.id - b.id)
-          .map((achievement) => (
-            <Card
+        <Box
+          sx={{
+            display: 'flex',
+            width: `${sorted.length * 100}%`,
+            transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+            transform: `translateX(-${(currentIndex * 100) / sorted.length}%)`,
+          }}
+        >
+          {sorted.map((achievement, index) => (
+            <Box
               key={achievement.id}
-              sx={{
-                //flex: '0 0 min(88vw, 520px)',
-                scrollSnapAlign: 'start',
-                borderRadius: '24px',
-                overflow: 'hidden',
-                // border: '1px solid rgba(40, 68, 115, 0.08)',
-                boxShadow: '0px 4px 8px rgba(40, 68, 115, 0.12)',
-                background: 'linear-gradient(180deg, rgba(255,255,255,0.98), rgba(247,249,252,0.98))',
-              }}
+              sx={{ width: `${100 / sorted.length}%`, flexShrink: 0 }}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${achievement.name} – ${index + 1} / ${sorted.length}`}
+              aria-hidden={currentIndex !== index}
             >
-              <CardActionArea sx={{ height: '100%', alignItems: 'stretch', cursor: 'default' }}>
+              <Card
+                sx={{
+                  borderRadius: 0,
+                  overflow: 'hidden',
+                  backgroundColor: 'rgba(255, 255, 255, 0.98)',
+                  border: 'none',
+                  boxShadow: 'none',
+                }}
+              >
                 <CardMedia
                   component="img"
                   image={achievement.image}
                   alt={achievement.name}
                   sx={{
-                    height: { xs: 240, sm: 280, md: 320 },
+                    height: { xs: 260, sm: 320, md: 380 },
                     objectFit: 'cover',
                   }}
                 />
-
                 <CardContent
                   sx={{
                     p: { xs: 2.5, sm: 3 },
@@ -119,31 +97,130 @@ const Achievements = () => {
                     gap: 1.2,
                   }}
                 >
+                  <TypographyBody2>{achievement.name}</TypographyBody2>
                   <Typography
-                    variant="h5"
-                    component="h3"
-                    sx={{
-                      color: 'rgba(40, 68, 115, 0.96)',
-                      fontWeight: 800,
-                      lineHeight: 1.15,
-                    }}
-                  >
-                    {achievement.name}
-                  </Typography>
-
-                  <Typography
-                    variant="body1"
-                    sx={{
-                      color: 'rgba(40, 68, 115, 0.78)',
-                      lineHeight: 1.7,
-                    }}
+                    variant="body2"
+                    sx={{ color: 'rgba(40, 68, 115, 0.78)', textAlign: 'center' }}
                   >
                     {achievement.description}
                   </Typography>
                 </CardContent>
-              </CardActionArea>
-            </Card>
+              </Card>
+            </Box>
           ))}
+        </Box>
+      </Box>
+
+      {/* Navigation */}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          mt: 3,
+          gap: 2,
+        }}
+      >
+        <IconButton
+          onClick={() => navigate('prev')}
+          disabled={isTransitioning}
+          aria-label="Előző eredmény"
+          sx={{
+            backgroundColor: 'rgba(40, 68, 115, 0.1)',
+            color: 'rgba(40, 68, 115, 0.8)',
+            border: '2px solid rgba(40, 68, 115, 0.2)',
+            width: 48,
+            height: 48,
+            '&:hover': {
+              backgroundColor: 'rgba(40, 68, 115, 0.15)',
+              color: 'rgba(40, 68, 115, 1)',
+              border: '2px solid rgba(40, 68, 115, 0.4)',
+              transform: 'scale(1.05)',
+            },
+            '&:disabled': { opacity: 0.5 },
+            transition: 'all 0.2s ease',
+          }}
+        >
+          <KeyboardArrowLeftIcon />
+        </IconButton>
+
+        {/* Pagination dots */}
+        <Box
+          sx={{
+            display: 'flex',
+            gap: 1.5,
+            alignItems: 'center',
+            backgroundColor: 'rgba(40, 68, 115, 0.05)',
+            borderRadius: '24px',
+            padding: '12px 20px',
+            border: '1px solid rgba(40, 68, 115, 0.1)',
+          }}
+          role="tablist"
+          aria-label="Carousel pagination"
+        >
+          {sorted.map((_, index) => (
+            <Box
+              key={index}
+              onClick={() => {
+                if (index === currentIndex || isTransitioning) return
+                setIsTransitioning(true)
+                setCurrentIndex(index)
+                setTimeout(() => setIsTransitioning(false), 600)
+              }}
+              role="tab"
+              aria-selected={currentIndex === index}
+              aria-label={`Ugrás ${index + 1}. diára`}
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  if (index === currentIndex || isTransitioning) return
+                  setIsTransitioning(true)
+                  setCurrentIndex(index)
+                  setTimeout(() => setIsTransitioning(false), 600)
+                }
+              }}
+              sx={{
+                width: currentIndex === index ? 24 : 12,
+                height: 12,
+                borderRadius: '6px',
+                backgroundColor: currentIndex === index
+                  ? 'rgba(40, 68, 115, 0.8)'
+                  : 'rgba(40, 68, 115, 0.3)',
+                cursor: 'pointer',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  backgroundColor: currentIndex === index
+                    ? 'rgba(40, 68, 115, 1)'
+                    : 'rgba(40, 68, 115, 0.6)',
+                  transform: 'scale(1.1)',
+                },
+              }}
+            />
+          ))}
+        </Box>
+
+        <IconButton
+          onClick={() => navigate('next')}
+          disabled={isTransitioning}
+          aria-label="Következő eredmény"
+          sx={{
+            backgroundColor: 'rgba(40, 68, 115, 0.1)',
+            color: 'rgba(40, 68, 115, 0.8)',
+            border: '2px solid rgba(40, 68, 115, 0.2)',
+            width: 48,
+            height: 48,
+            '&:hover': {
+              backgroundColor: 'rgba(40, 68, 115, 0.15)',
+              color: 'rgba(40, 68, 115, 1)',
+              border: '2px solid rgba(40, 68, 115, 0.4)',
+              transform: 'scale(1.05)',
+            },
+            '&:disabled': { opacity: 0.5 },
+            transition: 'all 0.2s ease',
+          }}
+        >
+          <KeyboardArrowRightIcon />
+        </IconButton>
       </Box>
     </Box>
   )

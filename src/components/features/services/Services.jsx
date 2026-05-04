@@ -137,7 +137,7 @@ const Services = () => {
           {selectedService && (
             <>
               <MuiTypography
-                variant="h4" 
+                variant="h4"
                 component="h2"
                 id="service-modal-title"
                 sx={{ 

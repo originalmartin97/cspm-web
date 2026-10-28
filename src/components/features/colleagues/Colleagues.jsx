@@ -20,6 +20,10 @@ const Colleagues = () => {
     setSelectedColleague(null)
   }
 
+  const visibleColleagues = colleaguesData
+    .filter((colleague) => colleague.visible !== false)
+    .sort((a, b) => a.id - b.id)
+
   return (
     <>
       <Grid container spacing={6}
@@ -30,8 +34,7 @@ const Colleagues = () => {
               marginTop: '16px',
           }}
       >
-        {colleaguesData
-        .sort((a,b) => a.id - b.id) // Sort colleagues by id
+        {visibleColleagues
         .map((colleague) => (
           <Grid item xs={12} md={6} lg={4} key={colleague.id} sx={{ display: 'flex' }}>
             <Card

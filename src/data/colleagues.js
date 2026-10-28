@@ -31,6 +31,7 @@ const colleaguesData = [
   {
     id: 2,
     name: 'Szépné Fekete Erzsébet',
+    visible: false,
     shortDescription: `Több mint 40 évet dolgoztam a bankszektorban, ahol lakossági és kisvállalkozói hitelezéssel és támogatásokkal  valamint biztosítással  foglalkoztam...`,
     longDescription: `Több mint 40 évet dolgoztam a bankszektorban, ahol lakossági és kisvállalkozói hitelezéssel és támogatásokkal  valamint biztosítással  foglalkoztam. Mivel nyugdíjba vonulásom után a régi ügyfeleim megkerestek hitellel és biztosítással kapcsolatos kérdésekkel, úgy döntöttem, hogy - felhasználva a tapasztalataimat - vállalkozóként folytatom ezt a tevékenységet. 
                         

@@ -3,9 +3,24 @@ import nkBenedek from '../assets/images/colleagues/nkBenedek.jpg'
 import szfErzsebet from '../assets/images/colleagues/szfErzsebet.jpg'
 import gkIlona from '../assets/images/colleagues/gkIlona.jpg'
 import vDavid from '../assets/images/colleagues/vDavid.jpeg'
+import rSzilvia from '../assets/images/colleagues/rSzilvia.jpg'
 
 
 const colleaguesData = [
+  {
+    id: 5,
+    name: 'Rozovics Szilvia',
+    shortDescription: 'Célom, hogy kedves, közvetlen és rugalmas hozzáállással levegyem az ügyfeleim válláról a keresgélés terhét...',
+    longDescription: `
+                      Kreatív és rugalmas embernek tartom magam. Az elmúlt munkáim és tanulmányaim során több területen is szakmai tapasztalatot szereztem, most pedig azért dolgozom, hogy ezeket a készségeket a leghatékonyabban hasznosítsam a biztosítási szakmában. Pályakezdőként friss lendülettel, nyitottan és a legújabb piaci megoldások ismeretével vetettem bele magam a munkába.
+
+                      Nagyon szeretek emberekkel dolgozni, édesanyaként pedig pontosan tudom, milyen hatalmas értéket jelent a családok védelme és a hosszú távú pénzügyi biztonság. Ezért fektetek különösen nagy hangsúlyt a tudatos öngondoskodásra: legyen szó a gyermekek jövőjét megalapozó családi megtakarításokról vagy a gondtalan időskort biztosító nyugdíj-előtakarékosságokról.
+
+                      Célom, hogy kedves, közvetlen és rugalmas hozzáállással levegyem az ügyfeleim válláról a keresgélés terhét, és megtaláljam számukra azt a legmegfelelőbb, teljesen egyénre szabott védelmet, amely valóban biztonságot nyújt a mindennapokban. Forduljon hozzám bizalommal, ha egy rugalmas, lelkiismeretes és odaadó partnert keres pénzügyi biztonsága megteremtéséhez!
+                      `,
+    image: rSzilvia,
+  },
+
   {
     id: 4,
     name: 'Varga Dávid',
